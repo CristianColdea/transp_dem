@@ -1,7 +1,6 @@
 """
-Script to compute in a systematic manner the calibration coefficients for
-gravitational model, transport demand.
-Also, the travels weights using LOGIT model are computed.
+Script to compute shor term transport demand.
+Three methods will be coded: Furness, Fratar and a new one.
 """
 
 # number of travels as a matrix with produced travels on lines
