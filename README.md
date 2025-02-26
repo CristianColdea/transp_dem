@@ -19,8 +19,8 @@ The motivation is based on the need to create helper piece of code to work with 
 ![Example screenshot](transportation_demand.png)
 
 ## Technologies
-Python3 and its math module
-matplotlib (later to be used in order to generate the appropriate graphs)
+* Python3 and its math module
+* matplotlib (later to be used in order to generate the appropriate graphs)
 
 ## Setup
 Just read the docstrings and be carefull to matrices dimensions
