@@ -40,14 +40,15 @@ List of features ready and TODOs for future development
 * Code two methods (classical and weighted) to determine the Gravitational Model calibration coefficients.
   
 To-do list:
-* Wow improvement to be done 1
-* Wow improvement to be done 2
+* Code Furness method.
+* Code Fratar method.
+* Code Gravitational Model method.
 
 ## Status
-Project is: _in progress_, _finished_, _no longer continue_ and why?
+Project is: _in progress_
 
 ## Inspiration
-Add here credits. Project inspired by..., based on...
+(Too) many online and library sources.
 
 ## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
+rdt333@gmail.com - feel free to contact me!
