@@ -474,56 +474,12 @@ class GravitMod:
 
         return ccoeffs_m
 
-# function for modal option
-def modopt(tca, tct, tda, tdt):
-    """
-    Function to compute modal option, i.e. auto and transit.
-    Takes as inputs the matrices of travels cost, auto and transit, and
-    duration, respectively.
-    Returns the weights of auto and transit travels for each zone to zone
-    combination.
-    """
-    # compute utilities for auto and transit modes
-    u_a = []    # store auto utility results
-    u_t = []    # store transit utility results
 
-    for i in range(len(tca)):
-        for ca, da in zip(tca[i], tda[i]):
-            u_a.append(2.5 - 0.5 * ca - 0.01 * da)
-        for ct, dt in zip(tct[i], tdt[i]):
-            u_t.append(-0.4 * ct - 0.012 * dt)
 
-    # print("Auto utilities, ", u_a)
-    # print("Transit utilities, ", u_t)
-
-    return (u_a, u_t)
-
-# function to compute auto and transit weight, from to each zone
-def logit(u_a, u_t):
-    """
-    Function to compute travels weights for each zone.
-    Takes as inputs the utilities lists, auto and transit.
-    Returns auto and transit weights for each zone to zone combination.
-    """
-    # import to get Euler number
-    from math import e
-    # print("e, ", e)
-
-    w_a = []    # store auto weights
-    w_t = []    # store transit weights
-    for u_a, u_t in zip(u_a, u_t):
-        w_i = e**u_a / (e**u_a + e**u_t)
-        # print(w_i)
-        w_i = round(w_i, 2)
-        # print(w_i)
-        # w_a.append(w_i)
-        w_t.append(round(1-w_i, 2))
-
-    # print("Auto travels weights, ", w_a)
-    # print("Trasit travels weights, ", w_t)
-
-    return (w_a, w_t)
-
+# *****
+"""
+Enter the methods calls section here
+"""
 # gvalsr = GravitMod.gravmod_init(travs, ffs, k_ij0)
 # print("gvalsr is, ", gvalsr)
 
