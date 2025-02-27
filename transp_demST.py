@@ -412,9 +412,9 @@ class GravitMod:
     def gravmod_fin(ffs, k_ijs, P_is, A_js):
         """
         Method to compute future travels using gravitational model.
-        Takes as inputs the future friction factors matrix, the previously
-        computed calibration coefficients matrix, the matrix of produced
-        travels and the matrix of attracted travels.
+        Takes as inputs the future friction factors matrix, the computed
+        calibration coefficients matrix (see next method in this class),
+        the matrix of produced travels and the matrix of attracted travels.
         Returns a matrix with future travels determined with gravitational
         model.
         """
@@ -462,6 +462,9 @@ class GravitMod:
 
         
     def ccoeffs(gvalsradj, travs):
+        """
+        Docstrings goes here ...
+        """
         # compute calibration coefficients
         ccoeffs = []
         for row_h, row_c in zip(travs, gvalsradj):
