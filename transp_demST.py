@@ -209,6 +209,9 @@ class GravitMod:
         cmp_flg = False  # comparison flag to govern the following cycle
         i = 0   # produced passes counter
         j = 0   # attracted passes counter
+        
+        # allocate initial computed travels matrix
+        travsc = travs
 
         while(cmp_flg == False):
                        
@@ -216,18 +219,20 @@ class GravitMod:
             s_Pic = []
             for item in travsc:
                 s_Pic.append(sum(item))
+
+            print()
+            print("P_is, ", P_is)
+            print("s_Pic, ", s_Pic)
             
-            cmp_flg = comp(s_Pih, s_Pic, tlr)
-            #print(cmp_flg)
-            if (comp(s_Pih, s_Pic, tlr) == False):
+            cmp_flg = comp(s_Pic, P_is, tlr)
+            print(cmp_flg)
+
+            if (comp(s_Pih, P_is, tlr) == False):
                 ccsi = []   # list to store produced travels coefficients
                 for ph, pc in zip(s_Pih, s_Pic):
                     ccsi.append(round(ph/pc, 3))
 
-                #print()
-                #print("travs, ", travs)
-                #print("travsc, ", travsc)
-                #print("coefficients on produced travels, ", ccsi)
+                # print("coefficients on produced travels, ", ccsi)
 
                 for x in range(len(travsc)):
                     travsc[x] = [ccsi[x]*item for item in travsc[x]]
