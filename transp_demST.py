@@ -201,7 +201,7 @@ class GravitMod:
         # get attracted travels sums on observed travels (cycling on transposes)
         s_Ajh = []   # store the attracted sums
 
-        travs_tt = list(zip(*travs))    # transpose the matrix hist travs
+        travs_tt = list(zip(*travs))    # transpose the observed travels
 
         for item in travs_tt:
             s_Ajh.append(sum(item))
