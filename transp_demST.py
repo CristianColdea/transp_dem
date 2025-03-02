@@ -168,18 +168,11 @@ class GravitMod:
         print()
         print("Enter Furness method.")
 
-        print("Historical travels matrix, ", travs)
-    
         # check if the matrices have the same shape
-        if(len(travs) != len(P_is)):
+        if(len(travs) != len(P_is) or len(travs) != len(A_js)):
             print("The matrices doesn't match. Please fix it.")
             exit()
         
-        if(len(travs) != len(A_js)):
-            print("The matrices doesn't match.Please fix it.")
-            exit()
-
-
         # function to compare the produced, respectively attracted travels
         # within a certain tolerance
         def comp(s_ih, s_ic, tlr):
@@ -205,7 +198,10 @@ class GravitMod:
         j = 0   # attracted passes counter
         
         # allocate initial computed travels matrix
-        travsc = travs
+        travsc = []
+
+        for row in travs:
+            travsc.append(row)
 
         while(cmp_flg == False):
                        
@@ -325,7 +321,7 @@ class GravitMod:
         travscrm = [travscr[i:i + 3] for i in range(0, len(travscr), 3)]
             
         #print()
-        print("Final rounded matrix, ", travscrm)
+        print("Final rounded matrix, Furness, ", travscrm)
         print("Historical travels matrix, ", travs)
         print("i is, ", i)
         print("j is, ", j)
@@ -580,7 +576,7 @@ class GravitMod:
         travscrm = [travscr[i:i + 3] for i in range(0, len(travscr), 3)]
             
         print()
-        print("Final rounded matrix, ", travscrm)
+        print("Final rounded matrix, weighted, ", travscrm)
         print("Historical travels matrix, ", travs)
         print("Exit iter_adj_wgt method.")
         
