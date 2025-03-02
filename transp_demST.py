@@ -167,12 +167,19 @@ class GravitMod:
 
         print()
         print("Enter Furness method.")
+
+        print("Historical travels matrix, ", travs)
     
         # check if the matrices have the same shape
-        if(len(travs) != len(travsc)):
+        if(len(travs) != len(P_is)):
             print("The matrices doesn't match. Please fix it.")
             exit()
         
+        if(len(travs) != len(A_js)):
+            print("The matrices doesn't match.Please fix it.")
+            exit()
+
+
         # function to compare the produced, respectively attracted travels
         # within a certain tolerance
         def comp(s_ih, s_ic, tlr):
@@ -250,11 +257,11 @@ class GravitMod:
             for item in travsc_tt:
                 s_Ajc.append(sum(item))
             
-            cmp_flg = comp(s_Ajh, s_Ajc, tlr)
+            cmp_flg = comp(s_Ajc, A_js, tlr)
             
             if (cmp_flg == False):
-                for ah, ac in zip(s_Ajh, s_Ajc):
-                    ccs.append(round(ah/ac, 3))
+                for ats, ac in zip(A_js, s_Ajc):
+                    ccs.append(round(ats/ac, 3))
 
                 #print()
                 #print("travs, ", travs)
@@ -262,7 +269,7 @@ class GravitMod:
                 #print("coefficients on attracted travels, ", ccsj)
 
                 for x in range(len(travsc_tt)):
-                    travsc_tt[x] = [ccsj[x]*item for item in travsc_tt[x]]
+                    travsc_tt[x] = [ccs[x]*item for item in travsc_tt[x]]
             
                 j += 1
 
@@ -280,6 +287,7 @@ class GravitMod:
                 
             # get attracted travels sums on new computed travels (cycling on transposes)
             s_Ajc.clear()   # clear the computed attracted sums
+            ccs.clear()    # clear the coefficients vector
 
             for item in travsc_tt:
                 s_Ajc.append(sum(item))
@@ -295,13 +303,18 @@ class GravitMod:
 
             #print()
             #print("s_Pic, ", s_Pic)
-
-            cmp_flg = comp(s_Ajh, s_Ajc, tlr)
-            #print("Flag on attracted, ", comp(s_Ajh, s_Ajc, tlr))
+            cmp_flgA = comp(s_Ajc, A_js, tlr)
+            print("Flag on attracted, ", cmp_flgA)
             
-            cmp_flg = comp(s_Pih, s_Pic, tlr)
-            #print("Flag on produced, ", cmp_flg)
+            cmp_flgP = comp(s_Pic, P_is, tlr)
+            print("Flag on produced, ", cmp_flgP)
 
+            if(cmp_flgA == True and cmp_flgP == True):
+                cmp_flg = True
+            else:
+                cmp_flg = False
+
+        
             travscr = []     # list to store rounded values, flatten form
             for item in travsc:
                 for item in item:
@@ -316,7 +329,7 @@ class GravitMod:
         print("Historical travels matrix, ", travs)
         print("i is, ", i)
         print("j is, ", j)
-        print("Exit iter_adj_in method.")
+        print("Exit Furness method.")
         
         return travscrm
 
@@ -657,6 +670,7 @@ Enter the methods calls section here
 #ccoeffsA = GravitMod.ccoeffs(gvalsadjA, travs)
 #ccoeffsB = GravitMod.ccoeffs(gvalsadjB, travs)
 
+travsc_furn = GravitMod.furness(travs, P_is, A_js)
 travsc_wgtd = GravitMod.iter_wgt_dmd(travs, P_is, A_js)
 print()
 print("Matrix of travels obtained with weighted coefficients is, ",
