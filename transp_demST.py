@@ -192,20 +192,7 @@ class GravitMod:
                     break
 
             return flag
-        
-        # get produced travels sums on observed travels
-        s_Pih = []
-        for item in travs:
-            s_Pih.append(sum(item))
-
-        # get attracted travels sums on observed travels (cycling on transposes)
-        s_Ajh = []   # store the attracted sums
-
-        travs_tt = list(zip(*travs))    # transpose the observed travels
-
-        for item in travs_tt:
-            s_Ajh.append(sum(item))
-
+         
         cmp_flg = False  # comparison flag to govern the following cycle
         i = 0   # produced passes counter
         j = 0   # attracted passes counter
@@ -227,30 +214,30 @@ class GravitMod:
             cmp_flg = comp(s_Pic, P_is, tlr)
             print(cmp_flg)
 
-            if (comp(s_Pih, P_is, tlr) == False):
-                ccsi = []   # list to store produced travels coefficients
-                for ph, pc in zip(s_Pih, s_Pic):
-                    ccsi.append(round(ph/pc, 3))
+            if (cmp_flg == False):
+                ccs = []   # list to store produced travels coefficients
+                for ps, pc in zip(P_is, s_Pic):
+                    ccs.append(round(ps/pc, 3))
 
-                # print("coefficients on produced travels, ", ccsi)
+                # print("coefficients on produced travels, ", ccs)
 
                 for x in range(len(travsc)):
-                    travsc[x] = [ccsi[x]*item for item in travsc[x]]
+                    travsc[x] = [ccs[x]*item for item in travsc[x]]
             
                 i += 1
 
-                #print()
-                #print("travsc after pass  i = ", i, "is ", travsc)
+                print()
+                print("travsc after pass  i = ", i, "is ", travsc)
             
             
             # *********
             # working on attracted travels
 
+            # clear the coefficients vector
+            ccs.clear()
+
             # transpose de matrices
             travsc_tt = list(zip(*travsc))
-
-            # travs_t = [list(sublist) for sublist in travs_tt]
-            # travsc_t = [list(sublist) for sublist in travsc_tt]
 
             # print()
             # print("travs_t, ", travs_t)
@@ -263,17 +250,11 @@ class GravitMod:
             for item in travsc_tt:
                 s_Ajc.append(sum(item))
             
-            # cmp_flg = comp(s_Ajh, s_Ajc, tlr)
-            # print(cmp_flg)
+            cmp_flg = comp(s_Ajh, s_Ajc, tlr)
             
-            #print()
-            #print("s_Ajh, ", s_Ajh)
-            #print("s_Ajc, ", s_Ajc)
-            
-            if (comp(s_Ajh, s_Ajc, tlr) == False):
-                ccsj = []   # list to store attracted travels coefficients
+            if (cmp_flg == False):
                 for ah, ac in zip(s_Ajh, s_Ajc):
-                    ccsj.append(round(ah/ac, 3))
+                    ccs.append(round(ah/ac, 3))
 
                 #print()
                 #print("travs, ", travs)
@@ -287,7 +268,6 @@ class GravitMod:
 
                #print()
                #print("travsc_tt after pass j = ", j, "is ", travsc_tt)
-                
                 
 
             travsc_0 = list(zip(*travsc_tt))
