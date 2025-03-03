@@ -12,8 +12,10 @@
 * [Contact](#contact)
 
 ## General info
-The object of the present project is to code two in use methods for short term transportation demand, i.e., Fratar and Furness. Additionally, an original new method is proposed.
-The motivation is based on the need to create helper piece of code to work with my classes and personal project.
+The object of the present project is to code three in use methods for short
+term transportation demand, i.e., Furness, Fratar and Detroit. Additionally,
+an original new method is proposed. The motivation is based on the need to
+create helper piece of code to work with my student classes and personal projects.
 
 ## Screenshots
 ![Example screenshot](transportation_demand.png)
@@ -31,18 +33,22 @@ Show examples of usage:
 
 ## Features
 List of features ready and TODOs for future development
-*~~Get ready the README file and the project outline.~~
+* ~~Get ready the README file and the project outline.~~
 * ~~Code the class to contain the needed methods.~~
 * ~~Code the new method.~~
 * Code Fratar method.
-* Code Furness method.
-* Code Gravitational Model method in order to establish a baseline.
+* Code Detroit method.
+* ~~Code Furness method.~~
+~~* Code Gravitational Model method in order to establish a baseline.~~
 * Code two methods (classical and weighted) to determine the Gravitational Model calibration coefficients.
   
 To-do list:
-* Code Furness method.
+* ~~Code Furness method.~~
+* ~~Code Fratar method.~~
+* ~~Code Gravitational Model method.~~
 * Code Fratar method.
-* Code Gravitational Model method.
+* Code Detroit method.
+* Code methods to determine the GM calibration coefficients.
 
 ## Status
 Project is: _in progress_
