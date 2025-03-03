@@ -371,9 +371,9 @@ class GravitMod:
             return flag
          
         cmp_flg = False  # comparison flag to govern the following cycle
-        i = 0   # produced passes counter
-        j = 0   # attracted passes counter
         
+        p = 0   # passes counter
+                
         # allocate initial computed travels matrix
         travsc = []
 
@@ -391,51 +391,40 @@ class GravitMod:
             print("P_is, ", P_is)
             print("s_Pic, ", s_Pic)
             
-            cmp_flg = comp(s_Pic, P_is, tlr)
-            print(cmp_flg)
+            # working on attracted travels
 
+            # clear the coefficients vector
+           
+            # transpose de matrices
+            travsc_tt = list(zip(*travsc))
+                 
+            # get attracted travels sums (cycling on transposes)
+            s_Ajc = []   # store the attracted sums
+
+            for item in travsc_tt:
+                s_Ajc.append(sum(item))
+
+            
             if (cmp_flg == False):
                 ccsi = []   # list to store produced travels growth factors
                 for ps, pc in zip(P_is, s_Pic):
                     ccsi.append(round(ps/pc, 3))
 
                 # print("coefficients on produced travels, ", ccsi)
+                ccsj = []
+                for ats, ac in zip(A_js, s_Ajc):
+                    ccsj.append(round(ats/ac, 3))
 
                 for x in range(len(travsc)):
                     travsc[x] = [ccs[x]*item for item in travsc[x]]
             
-                i += 1
+                p += 1
 
                 print()
-                print("travsc after pass  i = ", i, "is ", travsc)
+                print("travsc after pass = ", p, "is ", travsc)
             
             
-            # *********
-            # working on attracted travels
-
-            # clear the coefficients vector
-            ccs.clear()
-
-            # transpose de matrices
-            travsc_tt = list(zip(*travsc))
-
-            # print()
-            # print("travs_t, ", travs_t)
-            # print("travsc_t ", travsc_t)
-    
-                    
-            # get attracted travels sums on computed travels (cycling on transposes)
-            s_Ajc = []   # store the attracted sums
-
-            for item in travsc_tt:
-                s_Ajc.append(sum(item))
             
-            cmp_flg = comp(s_Ajc, A_js, tlr)
-            
-            if (cmp_flg == False):
-                for ats, ac in zip(A_js, s_Ajc):
-                    ccs.append(round(ats/ac, 3))
-
                 #print()
                 #print("travs, ", travs)
                 #print("travsc, ", travsc)
