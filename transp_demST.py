@@ -395,11 +395,11 @@ class GravitMod:
             print(cmp_flg)
 
             if (cmp_flg == False):
-                ccs = []   # list to store produced travels growth factors
+                ccsi = []   # list to store produced travels growth factors
                 for ps, pc in zip(P_is, s_Pic):
-                    ccs.append(round(ps/pc, 3))
+                    ccsi.append(round(ps/pc, 3))
 
-                # print("coefficients on produced travels, ", ccs)
+                # print("coefficients on produced travels, ", ccsi)
 
                 for x in range(len(travsc)):
                     travsc[x] = [ccs[x]*item for item in travsc[x]]
