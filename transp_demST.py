@@ -382,7 +382,7 @@ class GravitMod:
 
         while(cmp_flg == False):
                        
-            # get produced travels sums on computed travels
+            # get produced travels sums on current travels
             s_Pic = []
             for item in travsc:
                 s_Pic.append(sum(item))
@@ -395,7 +395,7 @@ class GravitMod:
             print(cmp_flg)
 
             if (cmp_flg == False):
-                ccs = []   # list to store produced travels coefficients
+                ccs = []   # list to store produced travels growth factors
                 for ps, pc in zip(P_is, s_Pic):
                     ccs.append(round(ps/pc, 3))
 
@@ -597,7 +597,9 @@ class GravitMod:
         j = 0   # attracted passes counter
         
         # allocate initial computed travels matrix
-        travsc = travs
+        travsc = []
+        for row in travs:
+            travsc.append(row)
 
         while(cmp_flg == False):
                        
