@@ -448,6 +448,7 @@ class GravitMod:
                         print("ccsj[t], ", ccsj[t])
                         asum = asum + travsc[r][t] * ccsj[t]
                         print("asum is, ", asum)
+                        
                         t_ij = travsc[r][t] * P_is[r] * ccsj[t] / asum
                         travs_ij.append(t_ij)
 
@@ -456,6 +457,7 @@ class GravitMod:
                         print("ccsi[tt], ", ccsi[tt])
                         psum = psum + travsc_tt[r][tt] * ccsi[tt]
                         print("psum is, ", psum)
+                        
                         t_ji = travsc[r][tt] * A_js[r] * ccsi[tt] / psum
                         travs_ji.append(t_ji)
 
@@ -466,6 +468,7 @@ class GravitMod:
 
                 for ij, ji in zip(travs_ij, travs_ji):
                     travsc0.append((ij+ji)/2)
+                print("travsc0 is, ", travsc0)
 
                 travsc.clear()
                 travsc = [travsc0[x:x + 3] for x in range(0, len(travsc0), 3)]
