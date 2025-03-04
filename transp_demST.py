@@ -380,7 +380,7 @@ class GravitMod:
         for row in travs:
             travsc.append(row)
 
-        print("Current matrix is, ", travs)
+        # print("Current matrix is, ", travs)
 
         while(cmp_flg == False):
                        
@@ -434,13 +434,23 @@ class GravitMod:
 
                 for r in range(len(travsc)):
                     print("row is, ", travsc[r])
+                    print("col is, ", travsc_tt[r])
                     asum = 0
+                    psum = 0
                     for t in range(len(travsc[r])):
                         print("trav is, ", travsc[r][t])
                         print("ccsj[t], ", ccsj[t])
                         asum = asum + travsc[r][t] * ccsj[t]
+                        t_ij1 = travsc[r][t] * P_is[r] * ccsj[t] / asum
 
-                    t_ij1 = travsc[r][t] * P_is[r] * ccsj[t] / asum
+                    for tt in range(len(travsc_tt[r])):
+                        print("trav is, ", travsc_tt[r][tt])
+                        print("ccsi[tt], ", ccsi[tt])
+                        psum = psum + travsc_tt[r][tt] * ccsi[tt]
+                        t_ij2 = travsc[r][tt] * A_js[r] * ccsi[tt] / psum
+
+                    print("t_ij1 is, ", t_ij1)
+                    print("t_ij2 is, ", t_ij2)
             
                 p += 1
 
