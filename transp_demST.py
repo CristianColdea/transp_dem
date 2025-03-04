@@ -431,6 +431,12 @@ class GravitMod:
                     ccsj.append(round(ats/ac, 3))
 
                 print("Current matrix is, ", travsc)
+                
+                # matrix to store t_ij travels
+                travs_ij = []
+
+                # matrix to store t_ji travels
+                travs_ji = []
 
                 for r in range(len(travsc)):
                     print("row is, ", travsc[r])
@@ -441,17 +447,30 @@ class GravitMod:
                         print("trav is, ", travsc[r][t])
                         print("ccsj[t], ", ccsj[t])
                         asum = asum + travsc[r][t] * ccsj[t]
-                        t_ij1 = travsc[r][t] * P_is[r] * ccsj[t] / asum
+                        print("asum is, ", asum)
+                        t_ij = travsc[r][t] * P_is[r] * ccsj[t] / asum
+                        travs_ij.append(t_ij)
 
                     for tt in range(len(travsc_tt[r])):
                         print("trav is, ", travsc_tt[r][tt])
                         print("ccsi[tt], ", ccsi[tt])
                         psum = psum + travsc_tt[r][tt] * ccsi[tt]
-                        t_ij2 = travsc[r][tt] * A_js[r] * ccsi[tt] / psum
+                        print("psum is, ", psum)
+                        t_ji = travsc[r][tt] * A_js[r] * ccsi[tt] / psum
+                        travs_ji.append(t_ji)
 
-                    print("t_ij1 is, ", t_ij1)
-                    print("t_ij2 is, ", t_ij2)
-            
+                print("travs_ij is, ", travs_ij)
+                print("travs_ji is, ", travs_ji)
+
+                travsc0 = []
+
+                for ij, ji in zip(travs_ij, travs_ji):
+                    travsc0.append((ij+ji)/2)
+
+                travsc.clear()
+                travsc = [travsc0[x:x + 3] for x in range(0, len(travsc0), 3)]
+
+                
                 p += 1
 
             print()
