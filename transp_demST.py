@@ -451,7 +451,7 @@ class GravitMod:
                         asum = asum + travsc[r][t] * ccsj[t]
                         print("asum is, ", asum)
                        
-                    # computing the travels with Fratar formula
+                    # computing the t_ij travels with Fratar formula
                     for t in range(len(travsc[r])):
                         t_ij = travsc[r][t] * P_is[r] * ccsj[t] / asum
                         travs_ij.append(t_ij)
@@ -462,7 +462,8 @@ class GravitMod:
                         print("ccsi[tt], ", ccsi[tt])
                         psum = psum + travsc_tt[r][tt] * ccsi[tt]
                         print("psum is, ", psum)
-                     
+                    # computing the t_ji travels with Fratar formula 
+                    for tt in range(len(travsc_tt[r])):
                         t_ji = travsc[r][tt] * A_js[r] * ccsi[tt] / psum
                         travs_ji.append(t_ji)
 
