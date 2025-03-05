@@ -443,21 +443,26 @@ class GravitMod:
                     print("col is, ", travsc_tt[r])
                     asum = 0
                     psum = 0
+
+                    # computing the sum of product between attracted and ccsj
                     for t in range(len(travsc[r])):
                         print("trav is, ", travsc[r][t])
                         print("ccsj[t], ", ccsj[t])
                         asum = asum + travsc[r][t] * ccsj[t]
                         print("asum is, ", asum)
-                        
+                       
+                    # computing the travels with Fratar formula
+                    for t in range(len(travsc[r])):
                         t_ij = travsc[r][t] * P_is[r] * ccsj[t] / asum
                         travs_ij.append(t_ij)
 
+                    # computing the sum of product between produced and ccsi
                     for tt in range(len(travsc_tt[r])):
                         print("trav is, ", travsc_tt[r][tt])
                         print("ccsi[tt], ", ccsi[tt])
                         psum = psum + travsc_tt[r][tt] * ccsi[tt]
                         print("psum is, ", psum)
-                        
+                     
                         t_ji = travsc[r][tt] * A_js[r] * ccsi[tt] / psum
                         travs_ji.append(t_ji)
 
