@@ -41,6 +41,7 @@ List of features ready and TODOs for future development
 * ~~Code Furness method.~~
 ~~* Code Gravitational Model method in order to establish a baseline.~~
 * Code two methods (classical and weighted) to determine the Gravitational Model calibration coefficients.
+* Break spaghetti in clean code (late task).
   
 To-do list:
 * ~~Code Furness method.~~
