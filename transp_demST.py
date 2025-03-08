@@ -446,7 +446,7 @@ class GravitMod:
 
                     # computing the sum of product between attracted and ccsj
                     for t in range(len(travsc[r])):
-                        print("trav is, ", travsc[r][t])
+                        print("trav_p is, ", travsc[r][t])
                         print("ccsj[t], ", ccsj[t])
                         asum = asum + travsc[r][t] * ccsj[t]
                         print("asum is, ", asum)
@@ -458,7 +458,7 @@ class GravitMod:
 
                     # computing the sum of product between produced and ccsi
                     for tt in range(len(travsc_tt[r])):
-                        print("trav is, ", travsc_tt[r][tt])
+                        print("trav_a is, ", travsc_tt[r][tt])
                         print("ccsi[tt], ", ccsi[tt])
                         psum = psum + travsc_tt[r][tt] * ccsi[tt]
                         print("psum is, ", psum)
