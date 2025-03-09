@@ -389,9 +389,9 @@ class GravitMod:
             for item in travsc:
                 s_Pic.append(sum(item))
 
-            # print()
-            # print("P_is, ", P_is)
-            # print("s_Pic, ", s_Pic)
+            print()
+            print("P_is, ", P_is)
+            print("s_Pic, ", s_Pic)
             
             # working on attracted travels
 
@@ -405,20 +405,23 @@ class GravitMod:
 
             for item in travsc_tt:
                 s_Ajc.append(sum(item))
+            
+            print()
+            print("s_Ajc, ", s_Ajc)
 
             cmp_flgA = comp(s_Ajc, A_js, tlr)
-            # print("Flag on attracted, ", cmp_flgA)
+            print("Flag on attracted, ", cmp_flgA)
             
             cmp_flgP = comp(s_Pic, P_is, tlr)
-            # print("Flag on produced, ", cmp_flgP)
+            print("Flag on produced, ", cmp_flgP)
 
             if(cmp_flgA == True and cmp_flgP == True):
                 cmp_flg = True
             else:
                 cmp_flg = False
 
-            if p == 1:
-                cmp_flg = True
+            if p == 2:
+               cmp_flg = True
 
             if (cmp_flg == False):
                 ccsi = []   # list to store produced travels growth factors
@@ -474,29 +477,23 @@ class GravitMod:
                 print("travs_ij is, ", travs_ij)
                 print("travs_ji is, ", travs_ji)
 
-                travsc0 = []
+            travsc0 = []
 
-                for ij, ji in zip(travs_ij, travs_ji):
-                    travsc0.append((ij+ji)/2)
-                print("travsc0 is, ", travsc0)
+            print("travsc0, ", travsc0)
 
-                travsc.clear()
-                travsc = [travsc0[x:x + 3] for x in range(0, len(travsc0), 3)]
+            for ij, ji in zip(travs_ij, travs_ji):
+                travsc0.append((ij+ji)/2)
+            print("travsc0 is, ", travsc0)
+
+            travsc.clear()
+            travsc = [travsc0[x:x + 3] for x in range(0, len(travsc0), 3)]
 
                 
-                p += 1
+            p += 1
 
             print()
             print("travsc after pass = ", p, "is ", travsc)
-            
-            
-            
-                                
-
-            # travsc_0 = list(zip(*travsc_tt))
-            # travsc = [list(sublist) for sublist in travsc_0]
-
-        # print("Final rounded matrix, Fratar, ", travscrm)
+        
         print("Historical travels matrix, ", travs)
         print("p is, ", p)
         print("Exit Fratar method.")
