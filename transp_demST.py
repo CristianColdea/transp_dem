@@ -466,6 +466,8 @@ class GravitMod:
                     print("travsc_tt is, ", travsc_tt)
                     # computing the t_ji travels with Fratar formula 
                     for tt in range(len(travsc[r])):
+                        print("trav_a - ", travsc[r][tt], "A_j - ", A_js[r],
+                              "ccsi - ", ccsi[tt])
                         t_ji = travsc[r][tt] * A_js[r] * ccsi[tt] / psum
                         travs_ji.append(t_ji)
 
