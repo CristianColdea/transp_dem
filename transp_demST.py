@@ -408,6 +408,7 @@ class GravitMod:
             
             print()
             print("s_Ajc, ", s_Ajc)
+            print("A_js, ", A_js)
 
             cmp_flgA = comp(s_Ajc, A_js, tlr)
             print("Flag on attracted, ", cmp_flgA)
@@ -420,7 +421,7 @@ class GravitMod:
             else:
                 cmp_flg = False
 
-            if p == 2:
+            if p == 3:
                cmp_flg = True
 
             if (cmp_flg == False):
