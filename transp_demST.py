@@ -392,6 +392,8 @@ class GravitMod:
             print()
             print("P_is, ", P_is)
             print("s_Pic, ", s_Pic)
+            print("Sigma P_is, ", sum(P_is))
+            print("Sigma s_Pic, ", sum(s_Pic))
             
             # working on attracted travels
 
@@ -409,6 +411,9 @@ class GravitMod:
             print()
             print("s_Ajc, ", s_Ajc)
             print("A_js, ", A_js)
+            print("Sigma A_js, ", sum(A_js))
+            print("Sigma s_Ajc, ", sum(s_Ajc))
+            print()
 
             cmp_flgA = comp(s_Ajc, A_js, tlr)
             print("Flag on attracted, ", cmp_flgA)
@@ -421,7 +426,7 @@ class GravitMod:
             else:
                 cmp_flg = False
 
-            if p == 5:
+            if p == 7:
                cmp_flg = True
 
             if (cmp_flg == False):
