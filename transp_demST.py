@@ -421,7 +421,7 @@ class GravitMod:
             else:
                 cmp_flg = False
 
-            if p == 3:
+            if p == 5:
                cmp_flg = True
 
             if (cmp_flg == False):
@@ -434,7 +434,7 @@ class GravitMod:
                 for ats, ac in zip(A_js, s_Ajc):
                     ccsj.append(round(ats/ac, 3))
 
-                print("Current matrix is, ", travsc)
+                # print("Current matrix is, ", travsc)
                 
                 # matrix to store t_ij travels
                 travs_ij = []
@@ -467,11 +467,11 @@ class GravitMod:
                         psum = psum + travsc_tt[r][tt] * ccsi[tt]
                         print("psum is, ", psum)
                     
-                    print("travsc_tt is, ", travsc_tt)
+                    # print("travsc_tt is, ", travsc_tt)
                     # computing the t_ji travels with Fratar formula 
                     for tt in range(len(travsc[r])):
-                        print("trav_a - ", travsc[r][tt], "A_j - ", A_js[tt],
-                              "ccsi - ", ccsi[tt])
+                        #print("trav_a - ", travsc[r][tt], "A_j - ", A_js[tt],
+                        #      "ccsi - ", ccsi[tt])
                         t_ji = travsc[r][tt] * A_js[tt] * ccsi[r] / psum
                         travs_ji.append(t_ji)
 
@@ -480,11 +480,11 @@ class GravitMod:
 
             travsc0 = []
 
-            print("travsc0, ", travsc0)
+            # print("travsc0, ", travsc0)
 
             for ij, ji in zip(travs_ij, travs_ji):
                 travsc0.append((ij+ji)/2)
-            print("travsc0 is, ", travsc0)
+            # print("travsc0 is, ", travsc0)
 
             travsc.clear()
             travsc = [travsc0[x:x + 3] for x in range(0, len(travsc0), 3)]
