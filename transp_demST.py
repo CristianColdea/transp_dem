@@ -426,7 +426,7 @@ class GravitMod:
             else:
                 cmp_flg = False
 
-            if p == 10:
+            if p == 425:
                cmp_flg = True
 
             if (cmp_flg == False):
