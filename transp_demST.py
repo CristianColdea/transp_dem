@@ -862,6 +862,9 @@ print("Matrix of travels obtained with weighted coefficients is, ",
 print()
 print("Matrix of travels obtained with Fratar method is, ",
       travs_frat)
+print()
+print("Matrix of travels obtained with Fratar (Furness corrected) is, ",
+      GravitMod.furness(travs_frat, P_is, A_js))
 
 #print("Adjusted matrix A, ", gvalsadjA)
 #print("Adjusted matrix B, ", gvalsadjB)
