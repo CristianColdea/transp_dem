@@ -426,7 +426,7 @@ class GravitMod:
             else:
                 cmp_flg = False
 
-            if p == 425:
+            if p == 1:
                cmp_flg = True
 
             if (cmp_flg == False):
@@ -500,11 +500,20 @@ class GravitMod:
             print()
             print("travsc after pass = ", p, "is ", travsc)
         
+        travscr = []     # list to store rounded values, flatten form
+        for item in travsc:
+            for item in item:
+                travscr.append(round(item))
+
+        #print()
+        #print("Final rounded and flatten, ", travscr)
+        travscrm = [travscr[i:i + 3] for i in range(0, len(travscr), 3)]
+
         print("Historical travels matrix, ", travs)
         print("p is, ", p)
         print("Exit Fratar method.")
         
-        return travsc
+        return travscrm
 
     def iter_wgt_dmd(travs, P_is, A_js, tlr=0.01):
 
@@ -850,6 +859,9 @@ travs_frat = GravitMod.fratar(travs, P_is, A_js)
 print()
 print("Matrix of travels obtained with weighted coefficients is, ",
       travsc_wgtd)
+print()
+print("Matrix of travels obtained with Fratar method is, ",
+      travs_frat)
 
 #print("Adjusted matrix A, ", gvalsadjA)
 #print("Adjusted matrix B, ", gvalsadjB)
