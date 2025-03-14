@@ -627,7 +627,6 @@ class GravitMod:
 
         return ccoeffs_m
 
-# function for modal option
 
     def furness(travs, P_is, A_js, tlr=0.01):
 
@@ -988,6 +987,183 @@ class GravitMod:
         print("Historical travels matrix, ", travs)
         print("p is, ", p)
         print("Exit Fratar method.")
+        
+        return travscrm
+
+
+    def detroit(travs, P_is, A_js, tlr=0.01):
+
+        """
+        Method to iteratively compute the future travels distribution using
+        Detroit (average growth) method.
+        Takes as input the observed (historical) travels in the form of squared
+        matrix,the future produced and attracted ones, respectively, in the
+        form of one-line matrices (one for produced and one for attracted)
+        and the precision (tolerance).
+        Returns a matrix with adjusted travels.
+        """
+
+        print()
+        print("Enter Detroit method.")
+
+        # check if the matrices have the same shape
+        if(len(travs) != len(P_is) or len(travs) != len(A_js)):
+            print("The matrices doesn't match. Please fix it.")
+            exit()
+        
+        # function to compare the produced, respectively attracted travels
+        # within a certain tolerance
+        def comp(s_ih, s_ic, tlr):
+            """
+            Function within method to compare two values, within tolerance.
+            Takes as inputs the lists of to be compared values
+            and the precision/tolerance.
+            Returns True of False.
+            """
+            
+            # set a flag
+            flag = True
+
+            for ih, ic in zip(s_ih, s_ic):
+                if(abs(ih - ic) / ih >= tlr): 
+                    flag = False
+                    break
+
+            return flag
+         
+        cmp_flg = False  # comparison flag to govern the following cycle
+        i = 0   # produced passes counter
+        j = 0   # attracted passes counter
+        
+        # allocate initial computed travels matrix
+        travsc = []
+
+        for row in travs:
+            travsc.append(row)
+
+        while(cmp_flg == False):
+                       
+            # get produced travels sums on computed travels
+            s_Pic = []
+            for item in travsc:
+                s_Pic.append(sum(item))
+
+            print()
+            print("P_is, ", P_is)
+            print("s_Pic, ", s_Pic)
+            
+            cmp_flg = comp(s_Pic, P_is, tlr)
+            print(cmp_flg)
+
+            if (cmp_flg == False):
+                ccs = []   # list to store produced travels coefficients
+                for ps, pc in zip(P_is, s_Pic):
+                    ccs.append(round(ps/pc, 3))
+
+                # print("coefficients on produced travels, ", ccs)
+
+                for x in range(len(travsc)):
+                    travsc[x] = [ccs[x]*item for item in travsc[x]]
+            
+                i += 1
+
+                print()
+                print("travsc after pass  i = ", i, "is ", travsc)
+            
+            
+            # *********
+            # working on attracted travels
+
+            # clear the coefficients vector
+            ccs.clear()
+
+            # transpose de matrices
+            travsc_tt = list(zip(*travsc))
+
+            # print()
+            # print("travs_t, ", travs_t)
+            # print("travsc_t ", travsc_t)
+    
+                    
+            # get attracted travels sums on computed travels (cycling on transposes)
+            s_Ajc = []   # store the attracted sums
+
+            for item in travsc_tt:
+                s_Ajc.append(sum(item))
+            
+            cmp_flg = comp(s_Ajc, A_js, tlr)
+            
+            if (cmp_flg == False):
+                for ats, ac in zip(A_js, s_Ajc):
+                    ccs.append(round(ats/ac, 3))
+
+                #print()
+                #print("travs, ", travs)
+                #print("travsc, ", travsc)
+                #print("coefficients on attracted travels, ", ccsj)
+
+                for x in range(len(travsc_tt)):
+                    travsc_tt[x] = [ccs[x]*item for item in travsc_tt[x]]
+            
+                j += 1
+
+               #print()
+               #print("travsc_tt after pass j = ", j, "is ", travsc_tt)
+                
+
+            travsc_0 = list(zip(*travsc_tt))
+            travsc = [list(sublist) for sublist in travsc_0]
+
+            #print()
+            #print("travsc,  ", travsc)
+            
+            # update the attracted sums
+                
+            # get attracted travels sums on new computed travels (cycling on transposes)
+            s_Ajc.clear()   # clear the computed attracted sums
+            ccs.clear()    # clear the coefficients vector
+
+            for item in travsc_tt:
+                s_Ajc.append(sum(item))
+
+            #print()
+            #print("s_Ajc, ", s_Ajc)
+
+            # update the produced sums
+            s_Pic.clear()
+
+            for item  in travsc:
+                s_Pic.append(sum(item))
+
+            #print()
+            #print("s_Pic, ", s_Pic)
+            cmp_flgA = comp(s_Ajc, A_js, tlr)
+            print("Flag on attracted, ", cmp_flgA)
+            
+            cmp_flgP = comp(s_Pic, P_is, tlr)
+            print("Flag on produced, ", cmp_flgP)
+
+            if(cmp_flgA == True and cmp_flgP == True):
+                cmp_flg = True
+            else:
+                cmp_flg = False
+
+        
+            travscr = []     # list to store rounded values, flatten form
+            for item in travsc:
+                for item in item:
+                    travscr.append(round(item))
+
+        #print()
+        #print("Final rounded and flatten, ", travscr)
+        travscrm = [travscr[i:i + 3] for i in range(0, len(travscr), 3)]
+            
+        #print()
+        print("Final rounded matrix, Furness, ", travscrm)
+        print("Historical travels matrix, ", travs)
+        print("i is, ", i)
+        print("j is, ", j)
+        print("Exit Furness method.")
         
         return travscrm
 
