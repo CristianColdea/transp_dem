@@ -1505,6 +1505,7 @@ Enter the methods calls section here
 #ccoeffsA = GravitMod.ccoeffs(gvalsadjA, travs)
 #ccoeffsB = GravitMod.ccoeffs(gvalsadjB, travs)
 
+"""
 travsc_furn = GravitMod.furness(travs, P_is, A_js)
 travsc_wgtd = GravitMod.iter_wgt_dmd(travs, P_is, A_js)
 travs_frat = GravitMod.fratar(travs, P_is, A_js)
@@ -1517,6 +1518,9 @@ print("Matrix of travels obtained with Fratar method is, ",
 print()
 print("Matrix of travels obtained with Fratar (Furness corrected) is, ",
       GravitMod.furness(travs_frat, P_is, A_js))
+"""
+
+# travsc_detr = GravitMod.detroit(travs, P_is, A_js)
 
 #print("Adjusted matrix A, ", gvalsadjA)
 #print("Adjusted matrix B, ", gvalsadjB)
