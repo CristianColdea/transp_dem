@@ -1041,6 +1041,11 @@ class GravitMod:
             travsc.append(row)
 
         while(cmp_flg == False):
+
+            if p == 3:
+                cmp_flg = True
+
+            print("travsc up is, ", travsc)
                        
             # get produced travels sums on computed travels
             s_Pic = []
@@ -1099,13 +1104,16 @@ class GravitMod:
                 cmp_flg = False
                 for x in range(len(travsc)):
                     for t in range(len(travsc[x])):
-                        travsc_interm.append(travsc_flt[x] * (ccsi[x] + ccsj[x])/2)
+                        travsc_interm.append(travsc[x][t] * (ccsi[x] + ccsj[t])/2)
 
                 # recreate the current travels matrix
-                travsc = [travsc[i:i + 3] for i in range(0, len(travsc), 3)]
+                travsc.clear()
+                travsc = [travsc_interm[i:i + 3] 
+                          for i in range(0, len(travsc), 3)]
                 
                 p += 1
-
+        
+        print("travsc is, ", travsc)
                   
         travscr = []     # list to store rounded values, flatten form
         for item in travsc:
