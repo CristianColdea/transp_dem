@@ -1094,14 +1094,14 @@ class GravitMod:
 
             # updating the travels matrix
             travsc_flt = []    #store the flatten travels matrix
-            travsc_flt = [t for t in travsc row for t in row]
+            travsc_flt = [t for row in travsc for t in row]
 
             print("Flatten current matrix, ", travsc_flt)
 
             if(cmp_flgP == False or cmp_flgA == False):
                 travsc =[]    #clear the matrix for next values
                 for x in range(len(travsc_flt)):
-                    travsc.append(travsc_flt[x] * (ccsi[x] + ccsj[x])/2
+                    travsc.append(travsc_flt[x] * (ccsi[x] + ccsj[x])/2)
 
                 # recreate the current travels matrix
                 travsc = [travsc[i:i + 3] for i in range(0, len(travsc), 3)]
@@ -1479,7 +1479,7 @@ print("Matrix of travels obtained with Fratar (Furness corrected) is, ",
       GravitMod.furness(travs_frat, P_is, A_js))
 """
 
-# travsc_detr = GravitMod.detroit(travs, P_is, A_js)
+travsc_detr = GravitMod.detroit(travs, P_is, A_js)
 
 #print("Adjusted matrix A, ", gvalsadjA)
 #print("Adjusted matrix B, ", gvalsadjB)
