@@ -1039,12 +1039,12 @@ class GravitMod:
 
         for row in travs:
             travsc.append(row)
-
+        
+        print("travsc before while loop, ", travsc)
+        
         while(cmp_flg == False):
 
-            if p == 3:
-                cmp_flg = True
-
+                        
             print("travsc up is, ", travsc)
                        
             # get produced travels sums on computed travels
@@ -1057,7 +1057,7 @@ class GravitMod:
             print("s_Pic, ", s_Pic)
             
             cmp_flgP = comp(s_Pic, P_is, tlr)
-            print(cmp_flg)
+            print("flag on produced, ", cmp_flgP)
 
             if (cmp_flgP == False):
                 ccsi = []   # list to store produced travels coefficients
@@ -1085,6 +1085,7 @@ class GravitMod:
                 s_Ajc.append(sum(item))
             
             cmp_flgA = comp(s_Ajc, A_js, tlr)
+            print("flag on attracted, ", cmp_flgA)
             
             if (cmp_flgA == False):
                 ccsj = []
@@ -1106,14 +1107,21 @@ class GravitMod:
                     for t in range(len(travsc[x])):
                         travsc_interm.append(travsc[x][t] * (ccsi[x] + ccsj[t])/2)
 
-                # recreate the current travels matrix
-                travsc.clear()
-                travsc = [travsc_interm[i:i + 3] 
-                          for i in range(0, len(travsc), 3)]
+            # recreate the current travels matrix
+            travsc.clear()
+            print("travsc_interm is, ", travsc_interm)
+            travsc = [travsc_interm[i:i + 3]
+                      for i in range(0, len(travsc_interm), 3)]
                 
-                p += 1
-        
-        print("travsc is, ", travsc)
+                # p += 1
+                
+            print("travsc down is, ", travsc)
+            p += 1
+            
+            # if p == 2:
+            #     cmp_flg = True
+
+        print("travsc after while loop is, ", travsc)
                   
         travscr = []     # list to store rounded values, flatten form
         for item in travsc:
@@ -1457,7 +1465,7 @@ class GravitMod:
 
 # *****
 """
-Enter the methods calls section here
+Enter the methods call section here
 """
 # gvalsr = GravitMod.gravmod_init(travs, ffs, k_ij0)
 # print("gvalsr is, ", gvalsr)
@@ -1486,6 +1494,7 @@ print("Matrix of travels obtained with Fratar (Furness corrected) is, ",
 """
 
 travsc_detr = GravitMod.detroit(travs, P_is, A_js)
+print("travsc_detr is, ", travsc_detr)
 
 #print("Adjusted matrix A, ", gvalsadjA)
 #print("Adjusted matrix B, ", gvalsadjB)
