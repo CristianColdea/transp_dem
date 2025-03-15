@@ -1051,10 +1051,10 @@ class GravitMod:
             print("P_is, ", P_is)
             print("s_Pic, ", s_Pic)
             
-            cmp_flg = comp(s_Pic, P_is, tlr)
+            cmp_flgP = comp(s_Pic, P_is, tlr)
             print(cmp_flg)
 
-            if (cmp_flg == False):
+            if (cmp_flgP == False):
                 ccsi = []   # list to store produced travels coefficients
                 for ps, pc in zip(P_is, s_Pic):
                     ccsi.append(round(ps/pc, 3))
@@ -1079,9 +1079,9 @@ class GravitMod:
             for item in travsc_tt:
                 s_Ajc.append(sum(item))
             
-            cmp_flg = comp(s_Ajc, A_js, tlr)
+            cmp_flgA = comp(s_Ajc, A_js, tlr)
             
-            if (cmp_flg == False):
+            if (cmp_flgA == False):
                 ccsj = []
                 for ats, ac in zip(A_js, s_Ajc):
                     ccsj.append(round(ats/ac, 3))
@@ -1093,15 +1093,13 @@ class GravitMod:
             print("s_Ajc, ", s_Ajc)
 
             # updating the travels matrix
-            travsc_flt = []    #store the flatten travels matrix
-            travsc_flt = [t for row in travsc for t in row]
-
-            print("Flatten current matrix, ", travsc_flt)
-
+            travsc_interm = []    #store the modified values
+           
             if(cmp_flgP == False or cmp_flgA == False):
-                travsc =[]    #clear the matrix for next values
-                for x in range(len(travsc_flt)):
-                    travsc.append(travsc_flt[x] * (ccsi[x] + ccsj[x])/2)
+                cmp_flg = False
+                for x in range(len(travsc)):
+                    for t in range(len(travsc[x])):
+                        travsc_interm.append(travsc_flt[x] * (ccsi[x] + ccsj[x])/2)
 
                 # recreate the current travels matrix
                 travsc = [travsc[i:i + 3] for i in range(0, len(travsc), 3)]
