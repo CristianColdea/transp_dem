@@ -1063,9 +1063,9 @@ class GravitMod:
 
                             
             # *********
-            # working on attracted travels
+            # working on attracted sums
 
-            # transpose de matrices
+            # transpose de matrix
             travsc_tt = list(zip(*travsc))
 
             # print()
@@ -1086,71 +1086,43 @@ class GravitMod:
                 for ats, ac in zip(A_js, s_Ajc):
                     ccsj.append(round(ats/ac, 3))
 
-                #print()
-                #print("travs, ", travs)
-                #print("travsc, ", travsc)
                 print("coefficients on attracted travels, ", ccsj)
 
-            
+            print()
+            print("A_js, ", A_js)
+            print("s_Ajc, ", s_Ajc)
+
+            # updating the travels matrix
+            travsc_flt = []    #store the flatten travels matrix
+            travsc_flt = [t for t in travsc row for t in row]
+
+            print("Flatten current matrix, ", travsc_flt)
+
             if(cmp_flgP == False or cmp_flgA == False):
-                for row in travsc:
-                    for t in row:
-                        travsc[row][t] = travsc[row][t] * (ccsi[] + ccsj[])/2
+                travsc =[]    #clear the matrix for next values
+                for x in range(len(travsc_flt)):
+                    travsc.append(travsc_flt[x] * (ccsi[x] + ccsj[x])/2
+
+                # recreate the current travels matrix
+                travsc = [travsc[i:i + 3] for i in range(0, len(travsc), 3)]
+                
                 p += 1
 
-            travsc_0 = list(zip(*travsc_tt))
-            travsc = [list(sublist) for sublist in travsc_0]
-
-            #print()
-            #print("travsc,  ", travsc)
-            
-            # update the attracted sums
-                
-            # get attracted travels sums on new computed travels (cycling on transposes)
-            s_Ajc.clear()   # clear the computed attracted sums
-            ccs.clear()    # clear the coefficients vector
-
-            for item in travsc_tt:
-                s_Ajc.append(sum(item))
-
-            #print()
-            #print("s_Ajc, ", s_Ajc)
-
-            # update the produced sums
-            s_Pic.clear()
-
-            for item  in travsc:
-                s_Pic.append(sum(item))
-
-            #print()
-            #print("s_Pic, ", s_Pic)
-            cmp_flgA = comp(s_Ajc, A_js, tlr)
-            print("Flag on attracted, ", cmp_flgA)
-            
-            cmp_flgP = comp(s_Pic, P_is, tlr)
-            print("Flag on produced, ", cmp_flgP)
-
-            if(cmp_flgA == True and cmp_flgP == True):
-                cmp_flg = True
-            else:
-                cmp_flg = False
-
-        
-            travscr = []     # list to store rounded values, flatten form
-            for item in travsc:
-                for item in item:
-                    travscr.append(round(item))
+                  
+        travscr = []     # list to store rounded values, flatten form
+        for item in travsc:
+            for item in item:
+                travscr.append(round(item))
 
         #print()
         #print("Final rounded and flatten, ", travscr)
         travscrm = [travscr[i:i + 3] for i in range(0, len(travscr), 3)]
             
         #print()
-        print("Final rounded matrix, Furness, ", travscrm)
+        print("Final rounded matrix, Detroit, ", travscrm)
         print("Historical travels matrix, ", travs)
-        print("i is, ", i)
-        print("j is, ", j)
-        print("Exit Furness method.")
+        print("p is, ", p)
+        print("Exit Detroit method.")
         
         return travscrm
 
