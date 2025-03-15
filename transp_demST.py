@@ -1032,9 +1032,8 @@ class GravitMod:
             return flag
          
         cmp_flg = False  # comparison flag to govern the following cycle
-        i = 0   # produced passes counter
-        j = 0   # attracted passes counter
-        
+        ij = 0   # passes counter
+               
         # allocate initial computed travels matrix
         travsc = []
 
