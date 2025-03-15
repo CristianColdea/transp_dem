@@ -1032,7 +1032,7 @@ class GravitMod:
             return flag
          
         cmp_flg = False  # comparison flag to govern the following cycle
-        ij = 0   # passes counter
+        p = 0   # passes counter
                
         # allocate initial computed travels matrix
         travsc = []
@@ -1055,26 +1055,15 @@ class GravitMod:
             print(cmp_flg)
 
             if (cmp_flg == False):
-                ccs = []   # list to store produced travels coefficients
+                ccsi = []   # list to store produced travels coefficients
                 for ps, pc in zip(P_is, s_Pic):
-                    ccs.append(round(ps/pc, 3))
+                    ccsi.append(round(ps/pc, 3))
 
-                # print("coefficients on produced travels, ", ccs)
+                print("coefficients on produced travels, ", ccsi)
 
-                for x in range(len(travsc)):
-                    travsc[x] = [ccs[x]*item for item in travsc[x]]
-            
-                i += 1
-
-                print()
-                print("travsc after pass  i = ", i, "is ", travsc)
-            
-            
+                            
             # *********
             # working on attracted travels
-
-            # clear the coefficients vector
-            ccs.clear()
 
             # transpose de matrices
             travsc_tt = list(zip(*travsc))
@@ -1093,22 +1082,21 @@ class GravitMod:
             cmp_flg = comp(s_Ajc, A_js, tlr)
             
             if (cmp_flg == False):
+                ccsj = []
                 for ats, ac in zip(A_js, s_Ajc):
-                    ccs.append(round(ats/ac, 3))
+                    ccsj.append(round(ats/ac, 3))
 
                 #print()
                 #print("travs, ", travs)
                 #print("travsc, ", travsc)
-                #print("coefficients on attracted travels, ", ccsj)
+                print("coefficients on attracted travels, ", ccsj)
 
-                for x in range(len(travsc_tt)):
-                    travsc_tt[x] = [ccs[x]*item for item in travsc_tt[x]]
             
-                j += 1
-
-               #print()
-               #print("travsc_tt after pass j = ", j, "is ", travsc_tt)
-                
+            if(cmp_flgP == False or cmp_flgA == False):
+                for row in travsc:
+                    for t in row:
+                        travsc[row][t] = travsc[row][t] * (ccsi[] + ccsj[])/2
+                p += 1
 
             travsc_0 = list(zip(*travsc_tt))
             travsc = [list(sublist) for sublist in travsc_0]
