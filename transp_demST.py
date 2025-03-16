@@ -1142,10 +1142,23 @@ class GravitMod:
         print("p is, ", p)
         # compute the final sums of produced
         s_Pic = []
-        for item in travsc:
+        for item in travscrm:
             s_Pic.append(sum(item))
         print()
         print("s_Pic, ", s_Pic)
+        print("P_is, ", P_is)
+
+        # working on attracted sums
+
+        # transpose de matrix
+        travsc_tt = list(zip(*travscrm))
+
+        # get attracted travels sums on computed travels (cycling on transposes)
+        s_Ajc = []   # store the attracted sums
+
+        for item in travsc_tt:
+            s_Ajc.append(sum(item))
+
         print("Exit Detroit method.")
         
         return travscrm
