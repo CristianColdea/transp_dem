@@ -1044,8 +1044,8 @@ class GravitMod:
         
         while(cmp_flg == False):
 
-                        
-            print("travsc up is, ", travsc)
+            print()           
+            print("travsc up is, ", travsc, "after pass, ", p)
                        
             # get produced travels sums on computed travels
             s_Pic = []
@@ -1064,6 +1064,7 @@ class GravitMod:
                 for ps, pc in zip(P_is, s_Pic):
                     ccsi.append(round(ps/pc, 3))
 
+                print()
                 print("coefficients on produced travels, ", ccsi)
 
                             
@@ -1085,6 +1086,7 @@ class GravitMod:
                 s_Ajc.append(sum(item))
             
             cmp_flgA = comp(s_Ajc, A_js, tlr)
+            print()
             print("flag on attracted, ", cmp_flgA)
             
             if (cmp_flgA == False):
@@ -1099,28 +1101,30 @@ class GravitMod:
             print("s_Ajc, ", s_Ajc)
 
             # updating the travels matrix
-            travsc_interm = []    #store the modified values
-           
+                       
             if(cmp_flgP == False or cmp_flgA == False):
-                cmp_flg = False
+                travsc_interm = []    #store the modified values
                 for x in range(len(travsc)):
                     for t in range(len(travsc[x])):
                         travsc_interm.append(travsc[x][t] * (ccsi[x] + ccsj[t])/2)
+                p += 1
 
-            # recreate the current travels matrix
-            travsc.clear()
-            print("travsc_interm is, ", travsc_interm)
+                
             travsc = [travsc_interm[i:i + 3]
                       for i in range(0, len(travsc_interm), 3)]
-                
+
+            # recreate the current travels matrix
+            # travsc.clear()
+            print("travsc_interm is, ", travsc_interm)
+                            
                 # p += 1
                 
             print("travsc down is, ", travsc)
-            p += 1
-            
-            # if p == 2:
-            #     cmp_flg = True
+            if(cmp_flgP == True and cmp_flgA == True):
+                cmp_flg = True
 
+
+                                
         print("travsc after while loop is, ", travsc)
                   
         travscr = []     # list to store rounded values, flatten form
@@ -1136,6 +1140,12 @@ class GravitMod:
         print("Final rounded matrix, Detroit, ", travscrm)
         print("Historical travels matrix, ", travs)
         print("p is, ", p)
+        # compute the final sums of produced
+        s_Pic = []
+        for item in travsc:
+            s_Pic.append(sum(item))
+        print()
+        print("s_Pic, ", s_Pic)
         print("Exit Detroit method.")
         
         return travscrm
