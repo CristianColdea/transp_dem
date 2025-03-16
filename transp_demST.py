@@ -1158,6 +1158,9 @@ class GravitMod:
 
         for item in travsc_tt:
             s_Ajc.append(sum(item))
+        print()
+        print("s_Ajc, ", s_Ajc)
+        print("A_js, ", A_js)
 
         print("Exit Detroit method.")
         
