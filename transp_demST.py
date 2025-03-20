@@ -991,11 +991,186 @@ class GravitMod:
         return travscrm
 
 
-    def averagei_gf(travs, P_is, A_js, tlr=0.01):
+    def average_gf(travs, P_is, A_js, tlr=0.01):
 
         """
         Method to iteratively compute the future travels distribution using
         average growth method.
+        Takes as input the observed (historical) travels in the form of squared
+        matrix,the future produced and attracted ones, respectively, in the
+        form of one-line matrices (one for produced and one for attracted)
+        and the precision (tolerance).
+        Returns a matrix with adjusted travels.
+        """
+
+        print()
+        print("Enter average_gf method.")
+
+        # check if the matrices have the same shape
+        if(len(travs) != len(P_is) or len(travs) != len(A_js)):
+            print("The matrices doesn't match. Please fix it.")
+            exit()
+        
+        # function to compare the produced, respectively attracted travels
+        # within a certain tolerance
+        def comp(s_ih, s_ic, tlr):
+            """
+            Function within method to compare two values, within tolerance.
+            Takes as inputs the lists of to be compared values
+            and the precision/tolerance.
+            Returns True of False.
+            """
+            
+            # set a flag
+            flag = True
+
+            for ih, ic in zip(s_ih, s_ic):
+                if(abs(ih - ic) / ih >= tlr): 
+                    flag = False
+                    break
+
+            return flag
+         
+        cmp_flg = False  # comparison flag to govern the following cycle
+        p = 0   # passes counter
+               
+        # allocate initial computed travels matrix
+        travsc = []
+
+        for row in travs:
+            travsc.append(row)
+        
+        print("travsc before while loop, ", travsc)
+        
+        while(cmp_flg == False):
+
+            print()           
+            print("travsc up is, ", travsc, "after pass, ", p)
+                       
+            # get produced travels sums on computed travels
+            s_Pic = []
+            for item in travsc:
+                s_Pic.append(sum(item))
+
+            print()
+            print("P_is, ", P_is)
+            print("s_Pic, ", s_Pic)
+            
+            cmp_flgP = comp(s_Pic, P_is, tlr)
+            print("flag on produced, ", cmp_flgP)
+
+            if (cmp_flgP == False):
+                ccsi = []   # list to store produced travels coefficients
+                for ps, pc in zip(P_is, s_Pic):
+                    ccsi.append(round(ps/pc, 3))
+
+                print()
+                print("coefficients on produced travels, ", ccsi)
+
+                            
+            # *********
+            # working on attracted sums
+
+            # transpose de matrix
+            travsc_tt = list(zip(*travsc))
+
+            # print()
+            # print("travs_t, ", travs_t)
+            # print("travsc_t ", travsc_t)
+    
+                    
+            # get attracted travels sums on computed travels (cycling on transposes)
+            s_Ajc = []   # store the attracted sums
+
+            for item in travsc_tt:
+                s_Ajc.append(sum(item))
+            
+            cmp_flgA = comp(s_Ajc, A_js, tlr)
+            print()
+            print("flag on attracted, ", cmp_flgA)
+            
+            if (cmp_flgA == False):
+                ccsj = []
+                for ats, ac in zip(A_js, s_Ajc):
+                    ccsj.append(round(ats/ac, 3))
+
+                print("coefficients on attracted travels, ", ccsj)
+
+            print()
+            print("A_js, ", A_js)
+            print("s_Ajc, ", s_Ajc)
+
+            # updating the travels matrix
+                       
+            if(cmp_flgP == False or cmp_flgA == False):
+                travsc_interm = []    #store the modified values
+                for x in range(len(travsc)):
+                    for t in range(len(travsc[x])):
+                        travsc_interm.append(travsc[x][t] * (ccsi[x] + ccsj[t])/2)
+                p += 1
+
+                
+            travsc = [travsc_interm[i:i + 3]
+                      for i in range(0, len(travsc_interm), 3)]
+
+            # recreate the current travels matrix
+            # travsc.clear()
+            print("travsc_interm is, ", travsc_interm)
+                            
+                # p += 1
+                
+            print("travsc down is, ", travsc)
+            if(cmp_flgP == True and cmp_flgA == True):
+                cmp_flg = True
+
+
+                                
+        print("travsc after while loop is, ", travsc)
+                  
+        travscr = []     # list to store rounded values, flatten form
+        for item in travsc:
+            for item in item:
+                travscr.append(round(item))
+
+        #print()
+        #print("Final rounded and flatten, ", travscr)
+        travscrm = [travscr[i:i + 3] for i in range(0, len(travscr), 3)]
+            
+        #print()
+        print("Final rounded matrix,i average_gf ", travscrm)
+        print("Historical travels matrix, ", travs)
+        print("p is, ", p)
+        # compute the final sums of produced
+        s_Pic = []
+        for item in travscrm:
+            s_Pic.append(sum(item))
+        print()
+        print("s_Pic, ", s_Pic)
+        print("P_is, ", P_is)
+
+        # working on attracted sums
+
+        # transpose de matrix
+        travsc_tt = list(zip(*travscrm))
+
+        # get attracted travels sums on computed travels (cycling on transposes)
+        s_Ajc = []   # store the attracted sums
+
+        for item in travsc_tt:
+            s_Ajc.append(sum(item))
+        print()
+        print("s_Ajc, ", s_Ajc)
+        print("A_js, ", A_js)
+
+        print("Exit average_gf method.")
+        
+        return travscrm
+
+    def detroit(travs, P_is, A_js, tlr=0.01):
+
+        """
+        Method to iteratively compute the future travels distribution using
+        Detroit method.
         Takes as input the observed (historical) travels in the form of squared
         matrix,the future produced and attracted ones, respectively, in the
         form of one-line matrices (one for produced and one for attracted)
@@ -1162,7 +1337,7 @@ class GravitMod:
         print("s_Ajc, ", s_Ajc)
         print("A_js, ", A_js)
 
-        print("Exit Detroit method.")
+        print("Exit average_gf method.")
         
         return travscrm
 
