@@ -991,11 +991,11 @@ class GravitMod:
         return travscrm
 
 
-    def detroit(travs, P_is, A_js, tlr=0.01):
+    def averagei_gf(travs, P_is, A_js, tlr=0.01):
 
         """
         Method to iteratively compute the future travels distribution using
-        Detroit (average growth) method.
+        average growth method.
         Takes as input the observed (historical) travels in the form of squared
         matrix,the future produced and attracted ones, respectively, in the
         form of one-line matrices (one for produced and one for attracted)
@@ -1004,7 +1004,7 @@ class GravitMod:
         """
 
         print()
-        print("Enter Detroit method.")
+        print("Enter average_gf method.")
 
         # check if the matrices have the same shape
         if(len(travs) != len(P_is) or len(travs) != len(A_js)):
