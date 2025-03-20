@@ -1179,7 +1179,7 @@ class GravitMod:
         """
 
         print()
-        print("Enter average_gf method.")
+        print("Enter Detroit method.")
 
         # check if the matrices have the same shape
         if(len(travs) != len(P_is) or len(travs) != len(A_js)):
