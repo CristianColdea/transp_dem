@@ -1281,10 +1281,13 @@ class GravitMod:
                 travsc_interm = []    #store the modified values
                 for x in range(len(travsc)):
                     for t in range(len(travsc[x])):
-                        travsc_interm.append(travsc[x][t] * (ccsi[x] + ccsj[t])/2)
+                        travsc_interm.append(travsc[x][t] * (ccsi[x] * ccsj[t])/
+                                             (sum(P_is)/sum(s_Pic)))
                 p += 1
 
-                
+            print()
+            print("Produced sum, ", sum(is_Pic))
+            print("Produced target sum, ", sum(P_is))
             travsc = [travsc_interm[i:i + 3]
                       for i in range(0, len(travsc_interm), 3)]
 
