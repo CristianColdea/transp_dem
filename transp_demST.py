@@ -1289,7 +1289,8 @@ class GravitMod:
             print("Produced sum, ", sum(s_Pic))
             print("Produced target sum, ", sum(P_is))
             print("Attracted sum, ", sum(s_Ajc))
-            print("Attracted target sum, ", sum(A_jc))
+            print("Attracted target sum, ", sum(A_js))
+            print("Overall growth factor, ", sum(P_is)/sum(s_Pic))
 
             travsc = [travsc_interm[i:i + 3]
                       for i in range(0, len(travsc_interm), 3)]
@@ -1305,7 +1306,7 @@ class GravitMod:
                 cmp_flg = True
 
             if(p == 3):
-                cmp_flag = True
+                cmp_flg = True
 
 
                                 
@@ -1346,7 +1347,7 @@ class GravitMod:
         print("s_Ajc, ", s_Ajc)
         print("A_js, ", A_js)
 
-        print("Exit average_gf method.")
+        print("Exit Detroit method.")
         
         return travscrm
 
