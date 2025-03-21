@@ -1200,6 +1200,9 @@ class GravitMod:
             flag = True
 
             for ih, ic in zip(s_ih, s_ic):
+                print("ih, ", ih)
+                print("ic, ", ic)
+                print("res, ", abs(ih-ic)/ih)
                 if(abs(ih - ic) / ih >= tlr): 
                     flag = False
                     break
@@ -1305,7 +1308,7 @@ class GravitMod:
             if(cmp_flgP == True and cmp_flgA == True):
                 cmp_flg = True
 
-            if(p == 3):
+            if(p == 8):
                 cmp_flg = True
 
 
