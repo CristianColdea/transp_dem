@@ -1286,8 +1286,11 @@ class GravitMod:
                 p += 1
 
             print()
-            print("Produced sum, ", sum(is_Pic))
+            print("Produced sum, ", sum(s_Pic))
             print("Produced target sum, ", sum(P_is))
+            print("Attracted sum, ", sum(s_Ajc))
+            print("Attracted target sum, ", sum(A_jc))
+
             travsc = [travsc_interm[i:i + 3]
                       for i in range(0, len(travsc_interm), 3)]
 
@@ -1300,6 +1303,9 @@ class GravitMod:
             print("travsc down is, ", travsc)
             if(cmp_flgP == True and cmp_flgA == True):
                 cmp_flg = True
+
+            if(p == 3):
+                cmp_flag = True
 
 
                                 
