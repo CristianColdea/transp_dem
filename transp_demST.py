@@ -1,6 +1,6 @@
 """
 Script to compute short term transport demand.
-Three methods will be coded: Furness, Fratar and a new one.
+Five methods will be coded: Furness, Fratar and a new one.
 """
 
 # number of travels as a matrix with produced travels on lines
@@ -1288,12 +1288,12 @@ class GravitMod:
                                              (sum(P_is)/sum(s_Pic)))
                 p += 1
 
-            print()
-            print("Produced sum, ", sum(s_Pic))
-            print("Produced target sum, ", sum(P_is))
-            print("Attracted sum, ", sum(s_Ajc))
-            print("Attracted target sum, ", sum(A_js))
-            print("Overall growth factor, ", sum(P_is)/sum(s_Pic))
+            # print()
+            # print("Produced sum, ", sum(s_Pic))
+            # print("Produced target sum, ", sum(P_is))
+            # print("Attracted sum, ", sum(s_Ajc))
+            # print("Attracted target sum, ", sum(A_js))
+            # print("Overall growth factor, ", sum(P_is)/sum(s_Pic))
 
             travsc = [travsc_interm[i:i + 3]
                       for i in range(0, len(travsc_interm), 3)]
@@ -1308,8 +1308,8 @@ class GravitMod:
             if(cmp_flgP == True and cmp_flgA == True):
                 cmp_flg = True
 
-            if(p == 8):
-                cmp_flg = True
+            # if(p == 8):
+            #     cmp_flg = True
 
 
                                 
@@ -1460,7 +1460,7 @@ class GravitMod:
             print("P_is, ", P_is)
             print("s_Pic, ", s_Pic)
             
-            cmp_flg = comp(s_Pic, P_is, tlr)
+            cmp_flg = comp(P_is,s_Pic, tlr)
             print(cmp_flg)
             if (comp(s_Pic, P_is, tlr) == False):
                 delta_P = []    #list to store the deltas of produced travels
@@ -1517,7 +1517,7 @@ class GravitMod:
             print("A_js, ", A_js)
             print("s_Ajc, ", s_Ajc)
 
-            if (comp(s_Ajc, A_js, tlr) == False):
+            if (comp(A_js, s_Ajc, tlr) == False):
                 delta_A = []    #list to store the deltas of attracted travels
                 for Ajs, Ajc in zip(A_js, s_Ajc):
                     delta_A.append(Ajs - Ajc)
@@ -1578,10 +1578,10 @@ class GravitMod:
             print()
             print("s_Pic, ", s_Pic)
 
-            cmp_flgA = comp(s_Ajc, A_js, tlr)
+            cmp_flgA = comp(A_js, s_Ajc, tlr)
             print("Flag on attracted, ", cmp_flgA)
             
-            cmp_flgP = comp(s_Pic, P_is, tlr)
+            cmp_flgP = comp(P_is, s_Pic, tlr)
             print("Flag on produced, ", cmp_flgP)
 
             if(cmp_flgA == True and cmp_flgP == True):
