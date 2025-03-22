@@ -1200,8 +1200,8 @@ class GravitMod:
             flag = True
 
             for ih, ic in zip(s_ih, s_ic):
-                print("ih, ", ih)
-                print("ic, ", ic)
+                # print("ih, ", ih)
+                # print("ic, ", ic)
                 print("res, ", abs(ih-ic)/ih)
                 if(abs(ih - ic) / ih >= tlr): 
                     flag = False
@@ -1234,7 +1234,7 @@ class GravitMod:
             print("P_is, ", P_is)
             print("s_Pic, ", s_Pic)
             
-            cmp_flgP = comp(s_Pic, P_is, tlr)
+            cmp_flgP = comp(P_is, s_Pic, tlr)
             print("flag on produced, ", cmp_flgP)
 
             if (cmp_flgP == False):
@@ -1263,7 +1263,7 @@ class GravitMod:
             for item in travsc_tt:
                 s_Ajc.append(sum(item))
             
-            cmp_flgA = comp(s_Ajc, A_js, tlr)
+            cmp_flgA = comp(A_js, s_Ajc, tlr)
             print()
             print("flag on attracted, ", cmp_flgA)
             
