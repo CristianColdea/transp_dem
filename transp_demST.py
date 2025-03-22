@@ -1085,7 +1085,7 @@ class GravitMod:
             for item in travsc_tt:
                 s_Ajc.append(sum(item))
             
-            cmp_flgA = comp(s_Ajc, A_js, tlr)
+            cmp_flgA = comp(A_js, s_Ajc, tlr)
             print()
             print("flag on attracted, ", cmp_flgA)
             
@@ -1460,7 +1460,7 @@ class GravitMod:
             print("P_is, ", P_is)
             print("s_Pic, ", s_Pic)
             
-            cmp_flg = comp(P_is,s_Pic, tlr)
+            cmp_flg = comp(P_is, s_Pic, tlr)
             print(cmp_flg)
             if (comp(s_Pic, P_is, tlr) == False):
                 delta_P = []    #list to store the deltas of produced travels
