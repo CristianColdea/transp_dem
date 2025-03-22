@@ -1627,18 +1627,27 @@ class GravitMod:
 """
 Enter the methods call section here
 """
-# gvalsr = GravitMod.gravmod_init(travs, ffs, k_ij0)
+gvalsr = GravitMod.gravmod_init(travs, ffs, k_ij0)
 # print("gvalsr is, ", gvalsr)
 
-# gvalsr_m = [gvalsr[i:i + 3] for i in range(0, len(gvalsr), 3)]
+gvalsr_m = [gvalsr[i:i + 3] for i in range(0, len(gvalsr), 3)]
+print()
+print("gvalsr matrix, ", gvalsr_m)
 
-#gvalsadjA = GravitMod.iter_adj_in(travs, gvalsr)
-#gvalsadjB = GravitMod.iter_adj_wgt(travs, gvalsr)
+gvalsadjA = GravitMod.iter_adj_in(travs, gvalsr)
+gvalsadjB = GravitMod.iter_adj_wgt(travs, gvalsr)
+print()
+print("gvalsadj iterative, ", gvalsadjA)
+print("gvalsadj weighted, ", gvalsadjB)
 
-#ccoeffsA = GravitMod.ccoeffs(gvalsadjA, travs)
-#ccoeffsB = GravitMod.ccoeffs(gvalsadjB, travs)
+ccoeffsA = GravitMod.ccoeffs(gvalsadjA, travs)
+ccoeffsB = GravitMod.ccoeffs(gvalsadjB, travs)
+print()
+print("Calibration coefficients iterative, ", ccoeffsA)
+print("Calibration coefficients weighted, ", ccoeffsB)
 
-"""
+travsc_gvalsf = GravitMod.gravmod_fin(ffs_f, ccoeffsA, P_is, A_js):
+
 travsc_furn = GravitMod.furness(travs, P_is, A_js)
 travsc_wgtd = GravitMod.iter_wgt_dmd(travs, P_is, A_js)
 travs_frat = GravitMod.fratar(travs, P_is, A_js)
