@@ -1607,60 +1607,6 @@ class GravitMod:
         print("Exit iter_adj_wgt method.")
         
         return travscrm
-
-
-    # method to compute gravitational model travels projected into the future
-    def gravmod_fin(ffs, k_ijs, P_is, A_js):
-        """
-        Method to compute future travels using gravitational model.
-        Takes as inputs the future friction factors matrix, the computed
-        calibration coefficients matrix (see next method in this class),
-        the matrix of produced travels and the matrix of attracted travels.
-        Returns a matrix with future travels determined with gravitational
-        model.
-        """
-        
-        # check if the matrices have the same shape
-        if(len(k_ijs) != len(ffs) or (len(k_ijs) != len(P_is)) or \
-           (len(k_ijs) != len(A_js))):
-            print("The matrices doesn't match. Please fix it.")
-            exit()
-    
-        # compute travels with gravitational model
-        gvals_fin = []    # to store computed values
-        for i in range(len(k_ijs)):
-            pdsum = 0
-            for j1, j2 in zip(A_js, ffs[i]):
-                pdsum = pdsum + j1 * j2
-                print("pdsum fin, ", pdsum)
-                print("ffs[i] fin, ", ffs[i])
-                # print("A_j, ", j1)
-            for k1 in range(len(ffs[i])):
-                gvals_fin.append((P_is[i] * ffs[i][k1] * A_js[k1] * k_ijs[i][k1] / pdsum))
-
-        print("Future travels obtained with gravitational model, ", gvals_fin)
-
-        # check raw produced travels
-        gvals_fin_m0 = [gvals_fin[i:i + 3] for i in range(0, len(gvals_fin), 3)]
-        # print(gvals_fin_m0)
-
-    
-        # round the number of travels
-        gvals_fin_r = []
-        for item in gvals_fin:
-            gvals_fin_r.append(round(item))
-    
-        print("Rounded number of furure travels, ", gvals_fin_r)
-        print("Total travels sum, ", sum(gvals_fin_r))
-
-        # group flatten list 'gvals_fin_r' as a matrix
-        gvals_fin_m = [gvals_fin_r[i:i + 3] for i in range(0,
-                         len(gvals_fin_r), 3)]
-
-        print("Matrix of future rounded numbers, ", gvals_fin_m)
-
-        return gvals_fin_r
-
         
     def ccoeffs(gvalsradj, travs):
         """
