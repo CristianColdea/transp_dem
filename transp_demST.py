@@ -628,7 +628,7 @@ class GravitMod:
         return ccoeffs_m
 
 
-    def furness(travs, P_is, A_js, tlr=0.01):
+    def furness(travs, P_is, A_js, tlr=0.05):
 
         """
         Method to iteratively compute the future travels distribution using
@@ -636,7 +636,7 @@ class GravitMod:
         Takes as input the observed (historical) travels in the form of squared
         matrix,the future produced and attracted ones, respectively, in the
         form of one-line matrices (one for produced and one for attracted)
-        and the precision (tolerance).
+        and the precision (tolerance) as indicated in technical literature.
         Returns a matrix with adjusted travels.
         """
 
@@ -689,7 +689,7 @@ class GravitMod:
             print("P_is, ", P_is)
             print("s_Pic, ", s_Pic)
             
-            cmp_flg = comp(s_Pic, P_is, tlr)
+            cmp_flg = comp(P_is, s_Pic, tlr)
             print(cmp_flg)
 
             if (cmp_flg == False):
@@ -728,7 +728,7 @@ class GravitMod:
             for item in travsc_tt:
                 s_Ajc.append(sum(item))
             
-            cmp_flg = comp(s_Ajc, A_js, tlr)
+            cmp_flg = comp(A_js, s_Ajc, tlr)
             
             if (cmp_flg == False):
                 for ats, ac in zip(A_js, s_Ajc):
@@ -774,10 +774,10 @@ class GravitMod:
 
             #print()
             #print("s_Pic, ", s_Pic)
-            cmp_flgA = comp(s_Ajc, A_js, tlr)
+            cmp_flgA = comp(A_js, s_Ajc, tlr)
             print("Flag on attracted, ", cmp_flgA)
             
-            cmp_flgP = comp(s_Pic, P_is, tlr)
+            cmp_flgP = comp(P_is, s_Pic, tlr)
             print("Flag on produced, ", cmp_flgP)
 
             if(cmp_flgA == True and cmp_flgP == True):
@@ -890,10 +890,10 @@ class GravitMod:
             print("Sigma s_Ajc, ", sum(s_Ajc))
             print()
 
-            cmp_flgA = comp(s_Ajc, A_js, tlr)
+            cmp_flgA = comp(A_js, s_Ajc, tlr)
             print("Flag on attracted, ", cmp_flgA)
             
-            cmp_flgP = comp(s_Pic, P_is, tlr)
+            cmp_flgP = comp(P_is, s_Pic, tlr)
             print("Flag on produced, ", cmp_flgP)
 
             if(cmp_flgA == True and cmp_flgP == True):
@@ -1056,7 +1056,7 @@ class GravitMod:
             print("P_is, ", P_is)
             print("s_Pic, ", s_Pic)
             
-            cmp_flgP = comp(s_Pic, P_is, tlr)
+            cmp_flgP = comp(P_is, s_Pic, tlr)
             print("flag on produced, ", cmp_flgP)
 
             if (cmp_flgP == False):
