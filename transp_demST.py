@@ -1173,7 +1173,7 @@ class GravitMod:
         
         return travscrm
 
-    def detroit(travs, P_is, A_js, tlr=0.01):
+    def detroit(travs, P_is, A_js, tlr=0.02):
 
         """
         Method to iteratively compute the future travels distribution using
@@ -1625,38 +1625,39 @@ gvalsr = GravitMod.gravmod_init(travs, ffs, k_ij0)
 # print("gvalsr is, ", gvalsr)
 
 gvalsr_m = [gvalsr[i:i + 3] for i in range(0, len(gvalsr), 3)]
-print()
+print("****")
 print("gvalsr matrix, ", gvalsr_m)
 
 gvalsadjA = GravitMod.iter_adj_in(travs, gvalsr)
 gvalsadjB = GravitMod.iter_adj_wgt(travs, gvalsr)
-print()
+print("****")
 print("gvalsadj iterative, ", gvalsadjA)
 print("gvalsadj weighted, ", gvalsadjB)
 
 ccoeffsA = GravitMod.ccoeffs(gvalsadjA, travs)
 ccoeffsB = GravitMod.ccoeffs(gvalsadjB, travs)
-print()
+print("****")
 print("Calibration coefficients iterative, ", ccoeffsA)
 print("Calibration coefficients weighted, ", ccoeffsB)
 
 gvalsr_fin = GravitMod.gravmod_fin(ffs_f, ccoeffsA, P_is, A_js)
-print()
+print("****")
 print("Future demand estimation via gravitational model, ", gvalsr_fin)
 
 travsc_furn = GravitMod.furness(travs, P_is, A_js)
-print()
+print("****")
 print("Travels with Furness method, ", travsc_furn)
 
 travs_frat = GravitMod.fratar(travs, P_is, A_js)
-print()
+print("****")
 print("Matrix of travels obtained with Fratar (Furness corrected), ",
       GravitMod.furness(travs_frat, P_is, A_js))
 
 travsc_detr = GravitMod.detroit(travs, P_is, A_js)
+print("****")
 print("Matrix of travels obtained with_Detroit method, ", travsc_detr)
 
 travsc_wgtd = GravitMod.iter_wgt_dmd(travs, P_is, A_js)
-print()
+print("****")
 print("Matrix of travels obtained with weighted coefficients is, ",
       travsc_wgtd)
