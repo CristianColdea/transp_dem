@@ -618,7 +618,13 @@ class GravitMod:
 
         
     def ccoeffs(gvalsradj, travs):
-        # compute calibration coefficients
+        """
+        Method to compute calibration coefficients for gravitational model.
+        Takes as inputs the adjusted and rounded travels matrix initially
+        computed with neutral calibration coefficients and original
+        travels (historical) matrix.
+        Returns the matrix of coefficients.
+        """
         ccoeffs = []
         for row_h, row_c in zip(travs, gvalsradj):
             for t_h, t_c in zip(row_h, row_c):
@@ -806,6 +812,7 @@ class GravitMod:
 
 
     def fratar(travs, P_is, A_js, tlr=0.01):
+
 
         """
         Method to iteratively compute the future travels distribution using
@@ -1608,25 +1615,12 @@ class GravitMod:
         
         return travscrm
         
-    def ccoeffs(gvalsradj, travs):
-        """
-        Docstrings goes here ...
-        """
-        # compute calibration coefficients
-        ccoeffs = []
-        for row_h, row_c in zip(travs, gvalsradj):
-            for t_h, t_c in zip(row_h, row_c):
-                ccoeffs.append(round(t_h / t_c, 2))
-        ccoeffs_m = [ccoeffs[i:i + 3] for i in range(0, len(ccoeffs), 3)]
-
-        return ccoeffs_m
 
 
-
-# *****
 """
 Enter the methods call section here
 """
+
 gvalsr = GravitMod.gravmod_init(travs, ffs, k_ij0)
 # print("gvalsr is, ", gvalsr)
 
@@ -1646,44 +1640,23 @@ print()
 print("Calibration coefficients iterative, ", ccoeffsA)
 print("Calibration coefficients weighted, ", ccoeffsB)
 
-travsc_gvalsf = GravitMod.gravmod_fin(ffs_f, ccoeffsA, P_is, A_js):
+gvalsr_fin = GravitMod.gravmod_fin(ffs_f, ccoeffsA, P_is, A_js)
+print()
+print("Future demand estimation via gravitational model, ", gvalsr_fin)
 
 travsc_furn = GravitMod.furness(travs, P_is, A_js)
-travsc_wgtd = GravitMod.iter_wgt_dmd(travs, P_is, A_js)
+print()
+print("Travels with Furness method, ", travsc_furn)
+
 travs_frat = GravitMod.fratar(travs, P_is, A_js)
+print()
+print("Matrix of travels obtained with Fratar (Furness corrected), ",
+      GravitMod.furness(travs_frat, P_is, A_js))
+
+travsc_detr = GravitMod.detroit(travs, P_is, A_js)
+print("Matrix of travels obtained with_Detroit method, ", travsc_detr)
+
+travsc_wgtd = GravitMod.iter_wgt_dmd(travs, P_is, A_js)
 print()
 print("Matrix of travels obtained with weighted coefficients is, ",
       travsc_wgtd)
-print()
-print("Matrix of travels obtained with Fratar method is, ",
-      travs_frat)
-print()
-print("Matrix of travels obtained with Fratar (Furness corrected) is, ",
-      GravitMod.furness(travs_frat, P_is, A_js))
-"""
-
-travsc_detr = GravitMod.detroit(travs, P_is, A_js)
-print("travsc_detr is, ", travsc_detr)
-
-#print("Adjusted matrix A, ", gvalsadjA)
-#print("Adjusted matrix B, ", gvalsadjB)
-#print("Calibration coefficients matrix A, ", ccoeffsA)
-#print("Calibration coefficients matrix B, ", ccoeffsB)
-
-# print("ccoeffs, ", ccoeffs)
-
-# ccoeffs_it = GravitMod.ccoeffs(gvalsradj_it, travs)
-
-# print("ccoeffs_it, ", ccoeffs_it)
-
-# ccoeffs_m = [ccoeffs[i:i + 3] for i in range(0, len(ccoeffs), 3)]
-
-# print("Calibration coefficients, ", ccoeffs_m)
-
-# gvalsr_fin = GravitMod.gravmod_fin(ffs_f, ccoeffs_m, P_is, A_js)
-
-# print("Future number of rounded travels, ", gvalsr_fin)
-
-# u_a, u_t = modopt(tca, tct, tda, tdt)
-
-# w_a, w_t = logit(u_a, u_t)
