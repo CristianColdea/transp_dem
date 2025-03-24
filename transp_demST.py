@@ -1643,11 +1643,17 @@ print("Calibration coefficients weighted, ", ccoeffsB)
 
 gvalsr_finA = GravitMod.gravmod_fin(ffs_f, ccoeffsA, P_is, A_js)
 gvalsr_finB = GravitMod.gravmod_fin(ffs_f, ccoeffsB, P_is, A_js)
-gvalsr_fin = GravitMod.gravmod_fin(ffs_f, ccoeffs, P_is, A_js)
+gvalsr_finAm = [gvalsr_finA[i:i + 3] for i in range(0, len(gvalsr_finA), 3)]
+gvalsr_finBm = [gvalsr_finB[i:i + 3] for i in range(0, len(gvalsr_finB), 3)]
+gvalsr_finAf = GravitMod.furness(gvalsr_finAm, P_is, A_js)
+gvalsr_finBf = GravitMod.furness(gvalsr_finBm, P_is, A_js)
 print("****")
 print("Future demand estimation via gravitational model A, ", gvalsr_finA)
 print("Future demand estimation via gravitational model B, ", gvalsr_finB)
-print("Future demand estimation via gravitational model, ", gvalsr_fin)
+print("Future demand estimation via gravitational model A final, ",
+      gvalsr_finAf)
+print("Future demand estimation via gravitational model B final, ",
+      gvalsr_finBf)
 
 travsc_furn = GravitMod.furness(travs, P_is, A_js)
 print("****")
