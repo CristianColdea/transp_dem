@@ -1664,6 +1664,10 @@ print("****")
 print("Matrix of travels obtained with Fratar (Furness corrected), ",
       GravitMod.furness(travs_frat, P_is, A_js))
 
+travsc_avgf = GravitMod.average_gf(travs, P_is, A_js)
+print("****")
+print("Matrix of travels obtained with average growth factor, ", travsc_avgf)
+
 travsc_detr = GravitMod.detroit(travs, P_is, A_js)
 print("****")
 print("Matrix of travels obtained with_Detroit method, ", travsc_detr)
