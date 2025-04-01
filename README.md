@@ -36,20 +36,20 @@ List of features ready and TODOs for future development
 * ~~Get ready the README file and the project outline.~~
 * ~~Code the class to contain the needed methods.~~
 * ~~Code the new method.~~
-* Code Fratar method.
-* Code Detroit method.
+~~* Code Fratar method.~~
+~~* Code Detroit method.~~
 * ~~Code Furness method.~~
 ~~* Code Gravitational Model method in order to establish a baseline.~~
-* Code two methods (classical and weighted) to determine the Gravitational Model calibration coefficients.
+~~* Code two methods (classical and weighted) to determine the Gravitational Model calibration coefficients.~~
 * Break spaghetti in clean code (late task).
   
 To-do list:
 * ~~Code Furness method.~~
 * ~~Code Fratar method.~~
 * ~~Code Gravitational Model method.~~
-* Code Fratar method.
-* Code Detroit method.
-* Code methods to determine the GM calibration coefficients.
+~~* Code Fratar method.~~
+~~* Code Detroit method.~~
+~~* Code methods to determine the GM calibration coefficients.~~
 
 ## Status
 Project is: _in progress_
