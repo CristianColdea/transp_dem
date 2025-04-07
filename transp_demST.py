@@ -1,6 +1,9 @@
 """
 Script to compute short term transport demand.
-Five methods will be coded: Furness, Fratar and a new one.
+Six methods will be coded: gravitational model (for reference),
+Furness, Fratar, Detroit, average growth factor and a new one.
+This script is going to be rewriten towards a better
+and cleaner code, Method decomposition is heavily used.
 """
 
 # number of travels as a matrix with produced travels on lines
