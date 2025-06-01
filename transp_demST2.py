@@ -1707,5 +1707,19 @@ print("Matrix of travels obtained with_Detroit method, ", travsc_detr)
 
 travsc_wgtd = GravitMod.iter_wgt_dmd(travs, P_is, A_js)
 print("****")
-print("Matrix of travels obtained with weighted coefficients is, ",
+print("Matrix of travels (produced) obtained with weighted coefficients is, ",
       travsc_wgtd)
+
+# check weighted estimation starting with attracted (not produced, like
+# previous call
+
+# transpose the travels matrix
+travs_tt = list(zip(*travs))
+print("Transpose travel matrix, ", travs_tt, '\n')
+print("Travel matrix, ", travs, '\n')
+
+travsc_wgtd_at = GravitMod.iter_wgt_dmd(travs_tt,A_js, P_is)
+print("****")
+print("Matrix of travels (attracted) obtained with weighted coefficients is, ",
+      list(zip(*travsc_wgtd_at)))
+
