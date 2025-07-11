@@ -3,7 +3,7 @@ Script to compute short term transport demand.
 Six methods will be coded: gravitational model (for reference),
 Furness, Fratar, Detroit, average growth factor and a new one.
 This script is going to be rewriten towards a better
-and cleaner code, Method decomposition is heavily used.
+and cleaner code, Method decomposition to be heavily used.
 """
 
 
@@ -169,7 +169,7 @@ class GravitMod:
         gvals_init_m = [gvals_init_r[i:i + 3] for i in range(0,
                          len(gvals_init_r), 3)]
         # print(gvals_init_m)
-        print("Matrix of rounded numbers, ", gvals_init_m)
+        # print("Matrix of rounded numbers, ", gvals_init_m)
 
         # check produced travels sum
         # for p1, p2 in zip(travs, gvals_init_m):
@@ -441,8 +441,8 @@ class GravitMod:
 
         c_Aj = [c_Aj0[j:j + 3] for j in range(0, len(c_Aj0), 3)]
 
-        print("c_Pi matrix, ", c_Pi)
-        print("c_Aj matrix, ", c_Aj)
+        # print("c_Pi matrix, ", c_Pi)
+        # print("c_Aj matrix, ", c_Aj)
 
         cmp_flg = False  # comparison flag to govern the following cycle
         i = 0   # produced passes counter
@@ -455,9 +455,9 @@ class GravitMod:
             for item in travsc:
                 s_Pic.append(sum(item))
             
-            print()
-            print("s_Pih, ", s_Pih)
-            print("s_Pic, ", s_Pic)
+            # print()
+            # print("s_Pih, ", s_Pih)
+            # print("s_Pic, ", s_Pic)
             
             cmp_flg = comp(s_Pih, s_Pic, tlr)
             print(cmp_flg)
@@ -470,7 +470,7 @@ class GravitMod:
                     for c in cP:
                         remind_P.append(c*delta_i)   #append weighted delta
                 remind_P = [remind_P[i:i + 3] for i in range(0, len(remind_P), 3)]
-                print("remind_P, ", remind_P)
+                # print("remind_P, ", remind_P)
                 travsP = []   # list to store adjusted travels matrix, produced
                 for remP, trav in zip(remind_P, travsc):
                     for rem, t in zip(remP, trav):
@@ -480,14 +480,14 @@ class GravitMod:
 
                 travsc = [travsP[i:i + 3] for i in range(0, len(travsP), 3)]
 
-                print()
-                print("travs, ", travs)
-                print("travsc, ", travsc)
+                # print()
+                # print("travs, ", travs)
+                # print("travsc, ", travsc)
                 
                 i += 1
 
-                print()
-                print("travsc after pass  i = ", i, "is ", travsc)
+                # print()
+                # print("travsc after pass  i = ", i, "is ", travsc)
             
             
             # working on attracted travels
@@ -504,9 +504,9 @@ class GravitMod:
             for item in travsc_tt:
                 s_Ajc.append(sum(item))
             
-            print()
-            print("s_Ajh, ", s_Ajh)
-            print("s_Ajc, ", s_Ajc)
+            # print()
+            # print("s_Ajh, ", s_Ajh)
+            # print("s_Ajc, ", s_Ajc)
             
             if (comp(s_Ajh, s_Ajc, tlr) == False):
                 delta_A = []    #list to store the deltas of attracted travels
@@ -517,8 +517,8 @@ class GravitMod:
                     for c in cA:
                         remind_A.append(c*delta_j)   #append weighted delta
                 remind_A = [remind_A[j:j + 3] for j in range(0, len(remind_A), 3)]
-                print("remind_A, ", remind_A)
-                print("travsc_tt, ", travsc_tt)
+                # print("remind_A, ", remind_A)
+                # print("travsc_tt, ", travsc_tt)
                 travsA = []   # list to store adjusted travels matrix, produced
                 for remA, trav in zip(remind_A, travsc_tt):
                     #print("remA, ", remA)
@@ -535,18 +535,18 @@ class GravitMod:
                 travsc_tt = list(zip(*travsc_t))
                 # obtain the matrix after iteration
                 travsc = [list(sublist) for sublist in travsc_tt]
-                print("travsA, ", travsA)
-                print("travsc_t, ", travsc_t)
-                print("travsc_tt, ", travsc_tt)
+                # print("travsA, ", travsA)
+                # print("travsc_t, ", travsc_t)
+                # print("travsc_tt, ", travsc_tt)
 
-                print()
-                print("travs, ", travs)
-                print("travsc, ", travsc)
+                # print()
+                # print("travs, ", travs)
+                # print("travsc, ", travsc)
                 
                 j += 1
 
-                print()
-                print("travsc_tt after pass j = ", j, "is ", travsc_tt)             
+                # print()
+                # print("travsc_tt after pass j = ", j, "is ", travsc_tt)             
                 
             # update the attracted sums
                 
@@ -556,8 +556,8 @@ class GravitMod:
             for item in travsc_tt:
                 s_Ajc.append(sum(item))
 
-            print()
-            print("s_Ajc, ", s_Ajc)
+            # print()
+            # print("s_Ajc, ", s_Ajc)
 
             # update the produced sums
             s_Pic.clear()
@@ -565,14 +565,14 @@ class GravitMod:
             for item  in travsc:
                 s_Pic.append(sum(item))
 
-            print()
-            print("s_Pic, ", s_Pic)
+            # print()
+            # print("s_Pic, ", s_Pic)
 
             cmp_flgA = comp(s_Ajh, s_Ajc, tlr)
-            print("Flag on attracted, ", cmp_flgA)
+            # print("Flag on attracted, ", cmp_flgA)
             
             cmp_flgP = comp(s_Pih, s_Pic, tlr)
-            print("Flag on produced, ", cmp_flgP)
+            # print("Flag on produced, ", cmp_flgP)
 
             if(cmp_flgA == True and cmp_flgP == True):
                 cmp_flg = True
@@ -620,13 +620,13 @@ class GravitMod:
             pdsum = 0
             for j1, j2 in zip(A_js, ffs[i]):
                 pdsum = pdsum + j1 * j2
-                print("pdsum fin, ", pdsum)
-                print("ffs[i] fin, ", ffs[i])
+                # print("pdsum fin, ", pdsum)
+                # print("ffs[i] fin, ", ffs[i])
                 # print("A_j, ", j1)
             for k1 in range(len(ffs[i])):
                 gvals_fin.append((P_is[i] * ffs[i][k1] * A_js[k1] * k_ijs[i][k1] / pdsum))
 
-        print("Future travels obtained with gravitational model, ", gvals_fin)
+        # print("Future travels obtained with gravitational model, ", gvals_fin)
 
         # check raw produced travels
         gvals_fin_m0 = [gvals_fin[i:i + 3] for i in range(0, len(gvals_fin), 3)]
@@ -638,8 +638,8 @@ class GravitMod:
         for item in gvals_fin:
             gvals_fin_r.append(round(item))
     
-        print("Rounded number of furure travels, ", gvals_fin_r)
-        print("Total travels sum, ", sum(gvals_fin_r))
+        # print("Rounded number of furure travels, ", gvals_fin_r)
+        # print("Total travels sum, ", sum(gvals_fin_r))
 
         # group flatten list 'gvals_fin_r' as a matrix
         gvals_fin_m = [gvals_fin_r[i:i + 3] for i in range(0,
@@ -667,7 +667,7 @@ class GravitMod:
         return ccoeffs_m
 
 
-    def furness(travs, P_is, A_js, tlr=0.05):
+    def furness(travs, P_is, A_js, tlr=0.02):
 
         """
         Method to iteratively compute the future travels distribution using
@@ -724,12 +724,12 @@ class GravitMod:
             for item in travsc:
                 s_Pic.append(sum(item))
 
-            print()
-            print("P_is, ", P_is)
-            print("s_Pic, ", s_Pic)
+            # print()
+            # print("P_is, ", P_is)
+            # print("s_Pic, ", s_Pic)
             
             cmp_flg = comp(P_is, s_Pic, tlr)
-            print(cmp_flg)
+            # print(cmp_flg)
 
             if (cmp_flg == False):
                 ccs = []   # list to store produced travels coefficients
@@ -743,8 +743,8 @@ class GravitMod:
             
                 i += 1
 
-                print()
-                print("travsc after pass  i = ", i, "is ", travsc)
+                # print()
+                # print("travsc after pass  i = ", i, "is ", travsc)
             
             
             # *********
@@ -814,10 +814,10 @@ class GravitMod:
             #print()
             #print("s_Pic, ", s_Pic)
             cmp_flgA = comp(A_js, s_Ajc, tlr)
-            print("Flag on attracted, ", cmp_flgA)
+            # print("Flag on attracted, ", cmp_flgA)
             
             cmp_flgP = comp(P_is, s_Pic, tlr)
-            print("Flag on produced, ", cmp_flgP)
+            # print("Flag on produced, ", cmp_flgP)
 
             if(cmp_flgA == True and cmp_flgP == True):
                 cmp_flg = True
@@ -904,11 +904,11 @@ class GravitMod:
             for item in travsc:
                 s_Pic.append(sum(item))
 
-            print()
-            print("P_is, ", P_is)
-            print("s_Pic, ", s_Pic)
-            print("Sigma P_is, ", sum(P_is))
-            print("Sigma s_Pic, ", sum(s_Pic))
+            # print()
+            # print("P_is, ", P_is)
+            # print("s_Pic, ", s_Pic)
+            # print("Sigma P_is, ", sum(P_is))
+            # print("Sigma s_Pic, ", sum(s_Pic))
             
             # working on attracted travels
 
@@ -923,18 +923,18 @@ class GravitMod:
             for item in travsc_tt:
                 s_Ajc.append(sum(item))
             
-            print()
-            print("s_Ajc, ", s_Ajc)
-            print("A_js, ", A_js)
-            print("Sigma A_js, ", sum(A_js))
-            print("Sigma s_Ajc, ", sum(s_Ajc))
-            print()
+            # print()
+            # print("s_Ajc, ", s_Ajc)
+            # print("A_js, ", A_js)
+            # print("Sigma A_js, ", sum(A_js))
+            # print("Sigma s_Ajc, ", sum(s_Ajc))
+            # print()
 
             cmp_flgA = comp(A_js, s_Ajc, tlr)
-            print("Flag on attracted, ", cmp_flgA)
+            # print("Flag on attracted, ", cmp_flgA)
             
             cmp_flgP = comp(P_is, s_Pic, tlr)
-            print("Flag on produced, ", cmp_flgP)
+            # print("Flag on produced, ", cmp_flgP)
 
             if(cmp_flgA == True and cmp_flgP == True):
                 cmp_flg = True
@@ -963,17 +963,17 @@ class GravitMod:
                 travs_ji = []
 
                 for r in range(len(travsc)):
-                    print("row is, ", travsc[r])
-                    print("col is, ", travsc_tt[r])
+                    # print("row is, ", travsc[r])
+                    # print("col is, ", travsc_tt[r])
                     asum = 0
                     psum = 0
 
                     # computing the sum of product between attracted and ccsj
                     for t in range(len(travsc[r])):
-                        print("trav_p is, ", travsc[r][t])
-                        print("ccsj[t], ", ccsj[t])
+                        # print("trav_p is, ", travsc[r][t])
+                        # print("ccsj[t], ", ccsj[t])
                         asum = asum + travsc[r][t] * ccsj[t]
-                        print("asum is, ", asum)
+                        # print("asum is, ", asum)
                        
                     # computing the t_ij travels with Fratar formula
                     for t in range(len(travsc[r])):
@@ -982,10 +982,10 @@ class GravitMod:
 
                     # computing the sum of product between produced and ccsi
                     for tt in range(len(travsc_tt[r])):
-                        print("trav_a is, ", travsc_tt[r][tt])
-                        print("ccsi[tt], ", ccsi[tt])
+                        # print("trav_a is, ", travsc_tt[r][tt])
+                        # print("ccsi[tt], ", ccsi[tt])
                         psum = psum + travsc_tt[r][tt] * ccsi[tt]
-                        print("psum is, ", psum)
+                        # print("psum is, ", psum)
                     
                     # print("travsc_tt is, ", travsc_tt)
                     # computing the t_ji travels with Fratar formula 
@@ -995,8 +995,8 @@ class GravitMod:
                         t_ji = travsc[r][tt] * A_js[tt] * ccsi[r] / psum
                         travs_ji.append(t_ji)
 
-                print("travs_ij is, ", travs_ij)
-                print("travs_ji is, ", travs_ji)
+                # print("travs_ij is, ", travs_ij)
+                # print("travs_ji is, ", travs_ji)
 
             travsc0 = []
 
@@ -1012,8 +1012,8 @@ class GravitMod:
                 
             p += 1
 
-            print()
-            print("travsc after pass = ", p, "is ", travsc)
+            # print()
+            # print("travsc after pass = ", p, "is ", travsc)
         
         travscr = []     # list to store rounded values, flatten form
         for item in travsc:
@@ -1031,7 +1031,7 @@ class GravitMod:
         return travscrm
 
 
-    def average_gf(travs, P_is, A_js, tlr=0.01):
+    def average_gf(travs, P_is, A_js, tlr=0.02):
 
         """
         Method to iteratively compute the future travels distribution using
@@ -1080,32 +1080,32 @@ class GravitMod:
         for row in travs:
             travsc.append(row)
         
-        print("travsc before while loop, ", travsc)
+        # print("travsc before while loop, ", travsc)
         
         while(cmp_flg == False):
 
-            print()           
-            print("travsc up is, ", travsc, "after pass, ", p)
+            # print()           
+            # print("travsc up is, ", travsc, "after pass, ", p)
                        
             # get produced travels sums on computed travels
             s_Pic = []
             for item in travsc:
                 s_Pic.append(sum(item))
 
-            print()
-            print("P_is, ", P_is)
-            print("s_Pic, ", s_Pic)
+            # print()
+            # print("P_is, ", P_is)
+            # print("s_Pic, ", s_Pic)
             
             cmp_flgP = comp(P_is, s_Pic, tlr)
-            print("flag on produced, ", cmp_flgP)
+            # print("flag on produced, ", cmp_flgP)
 
             if (cmp_flgP == False):
                 ccsi = []   # list to store produced travels coefficients
                 for ps, pc in zip(P_is, s_Pic):
                     ccsi.append(round(ps/pc, 3))
 
-                print()
-                print("coefficients on produced travels, ", ccsi)
+                # print()
+                # print("coefficients on produced travels, ", ccsi)
 
                             
             # *********
@@ -1126,8 +1126,8 @@ class GravitMod:
                 s_Ajc.append(sum(item))
             
             cmp_flgA = comp(A_js, s_Ajc, tlr)
-            print()
-            print("flag on attracted, ", cmp_flgA)
+            # print()
+            # print("flag on attracted, ", cmp_flgA)
             
             if (cmp_flgA == False):
                 ccsj = []
@@ -1136,9 +1136,9 @@ class GravitMod:
 
                 print("coefficients on attracted travels, ", ccsj)
 
-            print()
-            print("A_js, ", A_js)
-            print("s_Ajc, ", s_Ajc)
+            # print()
+            # print("A_js, ", A_js)
+            # print("s_Ajc, ", s_Ajc)
 
             # updating the travels matrix
                        
@@ -1155,17 +1155,17 @@ class GravitMod:
 
             # recreate the current travels matrix
             # travsc.clear()
-            print("travsc_interm is, ", travsc_interm)
+            # print("travsc_interm is, ", travsc_interm)
                             
                 # p += 1
                 
-            print("travsc down is, ", travsc)
+            # print("travsc down is, ", travsc)
             if(cmp_flgP == True and cmp_flgA == True):
                 cmp_flg = True
 
 
                                 
-        print("travsc after while loop is, ", travsc)
+        # print("travsc after while loop is, ", travsc)
                   
         travscr = []     # list to store rounded values, flatten form
         for item in travsc:
@@ -1258,32 +1258,32 @@ class GravitMod:
         for row in travs:
             travsc.append(row)
         
-        print("travsc before while loop, ", travsc)
+        # print("travsc before while loop, ", travsc)
         
         while(cmp_flg == False):
 
-            print()           
-            print("travsc up is, ", travsc, "after pass, ", p)
+            # print()           
+            # print("travsc up is, ", travsc, "after pass, ", p)
                        
             # get produced travels sums on computed travels
             s_Pic = []
             for item in travsc:
                 s_Pic.append(sum(item))
 
-            print()
-            print("P_is, ", P_is)
-            print("s_Pic, ", s_Pic)
+            # print()
+            # print("P_is, ", P_is)
+            # print("s_Pic, ", s_Pic)
             
             cmp_flgP = comp(P_is, s_Pic, tlr)
-            print("flag on produced, ", cmp_flgP)
+            # print("flag on produced, ", cmp_flgP)
 
             if (cmp_flgP == False):
                 ccsi = []   # list to store produced travels coefficients
                 for ps, pc in zip(P_is, s_Pic):
                     ccsi.append(round(ps/pc, 3))
 
-                print()
-                print("coefficients on produced travels, ", ccsi)
+                # print()
+                # print("coefficients on produced travels, ", ccsi)
 
                             
             # *********
@@ -1304,19 +1304,19 @@ class GravitMod:
                 s_Ajc.append(sum(item))
             
             cmp_flgA = comp(A_js, s_Ajc, tlr)
-            print()
-            print("flag on attracted, ", cmp_flgA)
+            # print()
+            # print("flag on attracted, ", cmp_flgA)
             
             if (cmp_flgA == False):
                 ccsj = []
                 for ats, ac in zip(A_js, s_Ajc):
                     ccsj.append(round(ats/ac, 3))
 
-                print("coefficients on attracted travels, ", ccsj)
+                # print("coefficients on attracted travels, ", ccsj)
 
-            print()
-            print("A_js, ", A_js)
-            print("s_Ajc, ", s_Ajc)
+            # print()
+            # print("A_js, ", A_js)
+            # print("s_Ajc, ", s_Ajc)
 
             # updating the travels matrix
                        
@@ -1340,11 +1340,11 @@ class GravitMod:
 
             # recreate the current travels matrix
             # travsc.clear()
-            print("travsc_interm is, ", travsc_interm)
+            # print("travsc_interm is, ", travsc_interm)
                             
                 # p += 1
                 
-            print("travsc down is, ", travsc)
+            # print("travsc down is, ", travsc)
             if(cmp_flgP == True and cmp_flgA == True):
                 cmp_flg = True
 
@@ -1353,7 +1353,7 @@ class GravitMod:
 
 
                                 
-        print("travsc after while loop is, ", travsc)
+        # print("travsc after while loop is, ", travsc)
                   
         travscr = []     # list to store rounded values, flatten form
         for item in travsc:
@@ -1394,7 +1394,7 @@ class GravitMod:
         
         return travscrm
 
-    def iter_wgt_dmd(travs, P_is, A_js, tlr=0.01):
+    def iter_wgt_dmd(travs, P_is, A_js, tlr=0.02):
 
         """
         Method to iteratively weight compute the future travels distribution.
@@ -1477,8 +1477,8 @@ class GravitMod:
 
         c_Aj = [c_Aj0[j:j + 3] for j in range(0, len(c_Aj0), 3)]
 
-        print("c_Pi matrix, ", c_Pi)
-        print("c_Aj matrix, ", c_Aj)
+       # print("c_Pi matrix, ", c_Pi)
+       # print("c_Aj matrix, ", c_Aj)
 
         cmp_flg = False  # comparison flag to govern the following cycle
         i = 0   # produced passes counter
@@ -1496,9 +1496,9 @@ class GravitMod:
             for item in travsc:
                 s_Pic.append(sum(item))
 
-            print()
-            print("P_is, ", P_is)
-            print("s_Pic, ", s_Pic)
+            # print()
+            # print("P_is, ", P_is)
+            # print("s_Pic, ", s_Pic)
             
             cmp_flg = comp(P_is, s_Pic, tlr)
             print(cmp_flg)
@@ -1511,7 +1511,7 @@ class GravitMod:
                     for c in cP:
                         remind_P.append(c*delta_i)   #append weighted delta
                 remind_P = [remind_P[i:i + 3] for i in range(0, len(remind_P), 3)]
-                print("remind_P, ", remind_P)
+                # print("remind_P, ", remind_P)
                 travsP = []   # list to store adjusted travels matrix, produced
                 for remP, trav in zip(remind_P, travsc):
                     for rem, t in zip(remP, trav):
@@ -1521,7 +1521,7 @@ class GravitMod:
 
                 travsc = [travsP[i:i + 3] for i in range(0, len(travsP), 3)]
 
-                print()
+                # print()
                 # print("travs, ", travs)
                 # print("travsc, ", travsc)
                 
@@ -1535,8 +1535,8 @@ class GravitMod:
             for item in travsc:
                 s_Pic.append(sum(item))
 
-            print()
-            print("s_Pic, ", s_Pic)
+            # print()
+            # print("s_Pic, ", s_Pic)
             
             """
             working on attracted travels
@@ -1553,25 +1553,25 @@ class GravitMod:
             for item in travsc_tt:
                 s_Ajc.append(sum(item))
             
-            print()
-            print("A_js, ", A_js)
-            print("s_Ajc, ", s_Ajc)
+            # print()
+            # print("A_js, ", A_js)
+            # print("s_Ajc, ", s_Ajc)
 
             if (comp(A_js, s_Ajc, tlr) == False):
                 delta_A = []    #list to store the deltas of attracted travels
                 for Ajs, Ajc in zip(A_js, s_Ajc):
                     delta_A.append(Ajs - Ajc)
-                print()
-                print("delta_A, ", delta_A)
-                print()
+                # print()
+                # print("delta_A, ", delta_A)
+                # print()
 
                 remind_A = []    #matrix of additions to travels, atrracted
                 for cA, delta_j in zip(c_Aj, delta_A):
                     for c in cA:
                         remind_A.append(c*delta_j)   #append weighted delta
                 remind_A = [remind_A[j:j + 3] for j in range(0, len(remind_A), 3)]
-                print("remind_A, ", remind_A)
-                print("travsc_tt, ", travsc_tt)
+                # print("remind_A, ", remind_A)
+                # print("travsc_tt, ", travsc_tt)
                 travsA = []   # list to store adjusted travels matrix, produced
                 for remA, trav in zip(remind_A, travsc_tt):
                     #print("remA, ", remA)
@@ -1585,13 +1585,13 @@ class GravitMod:
                 travsc_t = [travsA[i:i + 3] for i in range(0, len(travsA), 3)]
                 travsc_tt = list(zip(*travsc_t))
                 travsc = [list(sublist) for sublist in travsc_tt]
-                print("travsA, ", travsA)
-                print("travsc_t, ", travsc_t)
-                print("travsc_tt, ", travsc_tt)
+                # print("travsA, ", travsA)
+                # print("travsc_t, ", travsc_t)
+                # print("travsc_tt, ", travsc_tt)
 
-                print()
+                # print()
                 # print("travs, ", travs)
-                print("travsc, ", travsc)
+                # print("travsc, ", travsc)
                 
                 j += 1
 
@@ -1606,8 +1606,8 @@ class GravitMod:
             for item in travsc_t:
                 s_Ajc.append(sum(item))
 
-            print()
-            print("s_Ajc, ", s_Ajc)
+            # print()
+            # print("s_Ajc, ", s_Ajc)
 
             # update the produced sums
             s_Pic.clear()
@@ -1615,14 +1615,14 @@ class GravitMod:
             for item  in travsc:
                 s_Pic.append(sum(item))
 
-            print()
-            print("s_Pic, ", s_Pic)
+            # print()
+            # print("s_Pic, ", s_Pic)
 
             cmp_flgA = comp(A_js, s_Ajc, tlr)
-            print("Flag on attracted, ", cmp_flgA)
+            # print("Flag on attracted, ", cmp_flgA)
             
             cmp_flgP = comp(P_is, s_Pic, tlr)
-            print("Flag on produced, ", cmp_flgP)
+            # print("Flag on produced, ", cmp_flgP)
 
             if(cmp_flgA == True and cmp_flgP == True):
                 cmp_flg = True
@@ -1694,6 +1694,7 @@ print("Travels with Furness method, ", travsc_furn)
 
 travs_frat = GravitMod.fratar(travs, P_is, A_js)
 print("****")
+print("Raw Fratar method result, ", travs_frat)
 print("Matrix of travels obtained with Fratar (Furness corrected), ",
       GravitMod.furness(travs_frat, P_is, A_js))
 
@@ -1705,10 +1706,10 @@ travsc_detr = GravitMod.detroit(travs, P_is, A_js)
 print("****")
 print("Matrix of travels obtained with_Detroit method, ", travsc_detr)
 
-travsc_wgtd = GravitMod.iter_wgt_dmd(travs, P_is, A_js)
+travsc_wgtd_prod = GravitMod.iter_wgt_dmd(travs, P_is, A_js)
 print("****")
 print("Matrix of travels (produced) obtained with weighted coefficients is, ",
-      travsc_wgtd)
+      travsc_wgtd_prod)
 
 # check weighted estimation starting with attracted (not produced, like
 # previous call
@@ -1722,4 +1723,18 @@ travsc_wgtd_at = GravitMod.iter_wgt_dmd(travs_tt,A_js, P_is)
 print("****")
 print("Matrix of travels (attracted) obtained with weighted coefficients is, ",
       list(zip(*travsc_wgtd_at)))
+
+travsc_wgtd_atL = []   #matrix as list of lists
+for row in list(zip(*travsc_wgtd_at)):
+    travsc_wgtd_atL.append(list(row))
+print("Matrix of travels lists (attracted)", travsc_wgtd_atL)
+print("****")
+travsc_wgtd_aver = []
+for r1, r2 in zip(travsc_wgtd_prod, travsc_wgtd_atL):
+    for t1, t2 in zip(r1, r2):
+        travsc_wgtd_aver.append(round((t1+t2)/2, 0))
+travsc_wgtd_aver_m = [travsc_wgtd_aver[i:i + 3] for i in range(0,
+                                                               len(travsc_wgtd_aver), 3)]
+print("Matrix of travels (averaged) obtained with weighted coefficients is, ",
+      travsc_wgtd_aver_m)
 
