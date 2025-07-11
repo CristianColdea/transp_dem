@@ -460,7 +460,7 @@ class GravitMod:
             # print("s_Pic, ", s_Pic)
             
             cmp_flg = comp(s_Pih, s_Pic, tlr)
-            print(cmp_flg)
+            # print(cmp_flg)
             if (comp(s_Pih, s_Pic, tlr) == False):
                 delta_P = []    #list to store the deltas of produced travels
                 for Pih, Pic in zip(s_Pih, s_Pic):
@@ -588,7 +588,7 @@ class GravitMod:
         #print("Final rounded and flatten, ", travscr)
         travscrm = [travscr[i:i + 3] for i in range(0, len(travscr), 3)]
             
-        print()
+        # print()
         print("Final rounded matrix, ", travscrm)
         print("Historical travels matrix, ", travs)
         print("i is, ", i)
@@ -1134,7 +1134,7 @@ class GravitMod:
                 for ats, ac in zip(A_js, s_Ajc):
                     ccsj.append(round(ats/ac, 3))
 
-                print("coefficients on attracted travels, ", ccsj)
+                # print("coefficients on attracted travels, ", ccsj)
 
             # print()
             # print("A_js, ", A_js)
@@ -1242,7 +1242,7 @@ class GravitMod:
             for ih, ic in zip(s_ih, s_ic):
                 # print("ih, ", ih)
                 # print("ic, ", ic)
-                print("res, ", abs(ih-ic)/ih)
+                # print("res, ", abs(ih-ic)/ih)
                 if(abs(ih - ic) / ih >= tlr): 
                     flag = False
                     break
@@ -1501,7 +1501,7 @@ class GravitMod:
             # print("s_Pic, ", s_Pic)
             
             cmp_flg = comp(P_is, s_Pic, tlr)
-            print(cmp_flg)
+            # print(cmp_flg)
             if (comp(s_Pic, P_is, tlr) == False):
                 delta_P = []    #list to store the deltas of produced travels
                 for Pis, Pic in zip(P_is, s_Pic):
@@ -1527,8 +1527,8 @@ class GravitMod:
                 
                 i += 1
 
-                print()
-                print("travsc after pass  i = ", i, "is ", travsc)
+                # print()
+                # print("travsc after pass  i = ", i, "is ", travsc)
             
             s_Pic.clear()
 
@@ -1595,8 +1595,8 @@ class GravitMod:
                 
                 j += 1
 
-                print()
-                print("travsc_tt after pass j = ", j, "is ", travsc_tt)             
+                # print()
+                # print("travsc_tt after pass j = ", j, "is ", travsc_tt)             
                 
             # update the attracted sums
                 
@@ -1642,6 +1642,8 @@ class GravitMod:
         travscrm = [travscr[i:i + 3] for i in range(0, len(travscr), 3)]
             
         print()
+        print("i is, ",i)
+        print("j is, ", j)
         print("Final rounded matrix, weighted, ", travscrm)
         print("Historical travels matrix, ", travs)
         print("Exit iter_adj_wgt method.")
@@ -1663,6 +1665,7 @@ print("gvalsr matrix, ", gvalsr_m)
 
 gvalsadjA = GravitMod.iter_adj_in(travs, gvalsr)
 gvalsadjB = GravitMod.iter_adj_wgt(travs, gvalsr)
+print()
 print("****")
 print("gvalsadj iterative, ", gvalsadjA)
 print("gvalsadj weighted, ", gvalsadjB)
@@ -1670,6 +1673,7 @@ print("gvalsadj weighted, ", gvalsadjB)
 ccoeffsA = GravitMod.ccoeffs(gvalsadjA, travs)
 ccoeffsB = GravitMod.ccoeffs(gvalsadjB, travs)
 ccoeffs = [[0.47,0.99,1.45], [1.27,1.06,0.72], [1.47,0.98,0.23]]
+print()
 print("****")
 print("Calibration coefficients iterative, ", ccoeffsA)
 print("Calibration coefficients weighted, ", ccoeffsB)
@@ -1683,6 +1687,7 @@ gvalsr_finBf = GravitMod.furness(gvalsr_finBm, P_is, A_js)
 print("****")
 print("Future demand estimation via gravitational model A, ", gvalsr_finA)
 print("Future demand estimation via gravitational model B, ", gvalsr_finB)
+print()
 print("Future demand estimation via gravitational model A final, ",
       gvalsr_finAf)
 print("Future demand estimation via gravitational model B final, ",
