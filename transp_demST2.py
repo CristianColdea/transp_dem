@@ -186,9 +186,26 @@ class GravitMod:
 
         return gvals_init_m
 
+    def comp(s_ih, s_ic, tlr=0.05):
+        """
+        Method to compare two values, within tolerance.
+        Takes as inputs the lists of to be compared values
+        and the precision/tolerance.
+        Returns True of False.
+        """
+            
+        # set a flag
+        flag = True
+
+        for ih, ic in zip(s_ih, s_ic):
+            if(abs(ih - ic) / ih >= tlr): 
+                flag = False
+                break
+
+        return flag
+
 
     def iter_adj_in(travs, travsc, tlr=0.01):
-
         """
         Method to iteratively adjust travels computed with gravitational model.
         Takes as input the observed (historical) travels,the computed
@@ -197,7 +214,7 @@ class GravitMod:
         Returns a matrix with adjusted travels.
         """
 
-        print()
+        # print()
         print("Enter iter_adj_in method.")
     
         # check if the matrices have the same shape
@@ -205,26 +222,7 @@ class GravitMod:
             print("The matrices doesn't match. Please fix it.")
             exit()
         
-        # function to compare the produced, respectively attracted travels
-        # within a certain tolerance
-        def comp(s_ih, s_ic, tlr):
-            """
-            Function within method to compare two values, within tolerance.
-            Takes as inputs the lists of to be compared values
-            and the precision/tolerance.
-            Returns True of False.
-            """
-            
-            # set a flag
-            flag = True
-
-            for ih, ic in zip(s_ih, s_ic):
-                if(abs(ih - ic) / ih >= tlr): 
-                    flag = False
-                    break
-
-            return flag
-        
+                        
         # get produced travels sums on observed travels
         s_Pih = []
         for item in travs:
@@ -254,9 +252,7 @@ class GravitMod:
             #print("s_Pih, ", s_Pih)
             #print("s_Pic, ", s_Pic)
             
-            cmp_flg = comp(s_Pih, s_Pic, tlr)
-            #print(cmp_flg)
-            if (comp(s_Pih, s_Pic, tlr) == False):
+            if (GravitMod.comp(s_Pih, s_Pic) == False):
                 ccsi = []   # list to store produced travels coefficients
                 for ph, pc in zip(s_Pih, s_Pic):
                     ccsi.append(round(ph/pc, 3))
@@ -302,7 +298,7 @@ class GravitMod:
             #print("s_Ajh, ", s_Ajh)
             #print("s_Ajc, ", s_Ajc)
             
-            if (comp(s_Ajh, s_Ajc, tlr) == False):
+            if (GravitMod.comp(s_Ajh, s_Ajc) == False):
                 ccsj = []   # list to store attracted travels coefficients
                 for ah, ac in zip(s_Ajh, s_Ajc):
                     ccsj.append(round(ah/ac, 3))
@@ -348,10 +344,10 @@ class GravitMod:
             #print()
             #print("s_Pic, ", s_Pic)
 
-            cmp_flg = comp(s_Ajh, s_Ajc, tlr)
+            cmp_flg = GravitMod.comp(s_Ajh, s_Ajc)
             #print("Flag on attracted, ", comp(s_Ajh, s_Ajc, tlr))
             
-            cmp_flg = comp(s_Pih, s_Pic, tlr)
+            cmp_flg = GravitMod.comp(s_Pih, s_Pic)
             #print("Flag on produced, ", cmp_flg)
 
             travscr = []     # list to store rounded values, flatten form
@@ -384,33 +380,13 @@ class GravitMod:
         Returns a matrix with adjusted travels.
         """
 
-        print()
+        # print()
         print("Enter iter_adj_wgt method")
 
         # check if the matrices have the same shape
         if(len(travs) != len(travsc)):
             print("The matrices doesn't match. Please fix it.")
             exit()
-        
-        # function to compare the produced, respectively attracted travels
-        # within a certain tolerance
-        def comp(s_ih, s_ic, tlr):
-            """
-            Function within method to compare two values, within tolerance.
-            Takes as inputs the lists of to be compared values
-            and the precision/tolerance.
-            Returns True of False.
-            """
-            
-            # set a flag
-            flag = True
-
-            for ih, ic in zip(s_ih, s_ic):
-                if(abs(ih - ic) / ih >= tlr): 
-                    flag = False
-                    break
-
-            return flag
         
         # get produced travels sums on observed travels
         s_Pih = []
@@ -459,9 +435,7 @@ class GravitMod:
             # print("s_Pih, ", s_Pih)
             # print("s_Pic, ", s_Pic)
             
-            cmp_flg = comp(s_Pih, s_Pic, tlr)
-            # print(cmp_flg)
-            if (comp(s_Pih, s_Pic, tlr) == False):
+            if (GravitMod.comp(s_Pih, s_Pic) == False):
                 delta_P = []    #list to store the deltas of produced travels
                 for Pih, Pic in zip(s_Pih, s_Pic):
                     delta_P.append(Pih - Pic)
@@ -508,7 +482,7 @@ class GravitMod:
             # print("s_Ajh, ", s_Ajh)
             # print("s_Ajc, ", s_Ajc)
             
-            if (comp(s_Ajh, s_Ajc, tlr) == False):
+            if (GravitMod.comp(s_Ajh, s_Ajc) == False):
                 delta_A = []    #list to store the deltas of attracted travels
                 for Ajh, Ajc in zip(s_Ajh, s_Ajc):
                     delta_A.append(Ajh - Ajc)
@@ -568,10 +542,10 @@ class GravitMod:
             # print()
             # print("s_Pic, ", s_Pic)
 
-            cmp_flgA = comp(s_Ajh, s_Ajc, tlr)
+            cmp_flgA = GravitMod.comp(s_Ajh, s_Ajc)
             # print("Flag on attracted, ", cmp_flgA)
             
-            cmp_flgP = comp(s_Pih, s_Pic, tlr)
+            cmp_flgP = GravitMod.comp(s_Pih, s_Pic)
             # print("Flag on produced, ", cmp_flgP)
 
             if(cmp_flgA == True and cmp_flgP == True):
@@ -667,7 +641,7 @@ class GravitMod:
         return ccoeffs_m
 
 
-    def furness(travs, P_is, A_js, tlr=0.02):
+    def furness(travs, P_is, A_js, tlr=0.01):
 
         """
         Method to iteratively compute the future travels distribution using
@@ -679,34 +653,14 @@ class GravitMod:
         Returns a matrix with adjusted travels.
         """
 
-        print()
+        # print()
         print("Enter Furness method.")
 
         # check if the matrices have the same shape
         if(len(travs) != len(P_is) or len(travs) != len(A_js)):
             print("The matrices doesn't match. Please fix it.")
             exit()
-        
-        # function to compare the produced, respectively attracted travels
-        # within a certain tolerance
-        def comp(s_ih, s_ic, tlr):
-            """
-            Function within method to compare two values, within tolerance.
-            Takes as inputs the lists of to be compared values
-            and the precision/tolerance.
-            Returns True of False.
-            """
-            
-            # set a flag
-            flag = True
-
-            for ih, ic in zip(s_ih, s_ic):
-                if(abs(ih - ic) / ih >= tlr): 
-                    flag = False
-                    break
-
-            return flag
-         
+           
         cmp_flg = False  # comparison flag to govern the following cycle
         i = 0   # produced passes counter
         j = 0   # attracted passes counter
@@ -728,7 +682,7 @@ class GravitMod:
             # print("P_is, ", P_is)
             # print("s_Pic, ", s_Pic)
             
-            cmp_flg = comp(P_is, s_Pic, tlr)
+            cmp_flg = GravitMod.comp(P_is, s_Pic)
             # print(cmp_flg)
 
             if (cmp_flg == False):
@@ -767,7 +721,7 @@ class GravitMod:
             for item in travsc_tt:
                 s_Ajc.append(sum(item))
             
-            cmp_flg = comp(A_js, s_Ajc, tlr)
+            cmp_flg = GravitMod.comp(A_js, s_Ajc)
             
             if (cmp_flg == False):
                 for ats, ac in zip(A_js, s_Ajc):
@@ -813,10 +767,10 @@ class GravitMod:
 
             #print()
             #print("s_Pic, ", s_Pic)
-            cmp_flgA = comp(A_js, s_Ajc, tlr)
+            cmp_flgA = GravitMod.comp(A_js, s_Ajc)
             # print("Flag on attracted, ", cmp_flgA)
             
-            cmp_flgP = comp(P_is, s_Pic, tlr)
+            cmp_flgP = GravitMod.comp(P_is, s_Pic)
             # print("Flag on produced, ", cmp_flgP)
 
             if(cmp_flgA == True and cmp_flgP == True):
@@ -857,34 +811,14 @@ class GravitMod:
         Returns a matrix with adjusted travels.
         """
 
-        print()
+        # print()
         print("Enter Fratar method.")
 
         # check if the matrices have the same shape
         if(len(travs) != len(P_is) or len(travs) != len(A_js)):
             print("The matrices doesn't match. Please fix it.")
             exit()
-        
-        # function to compare the produced, respectively attracted travels
-        # within a certain tolerance
-        def comp(s_ih, s_ic, tlr):
-            """
-            Function within method to compare two values, within tolerance.
-            Takes as inputs the lists of to be compared values
-            and the precision/tolerance.
-            Returns True of False.
-            """
-            
-            # set a flag
-            flag = True
-
-            for ih, ic in zip(s_ih, s_ic):
-                if(abs(ih - ic) / ih >= tlr): 
-                    flag = False
-                    break
-
-            return flag
-         
+                 
         cmp_flg = False  # comparison flag to govern the following cycle
         
         p = 0   # passes counter
@@ -906,7 +840,7 @@ class GravitMod:
 
             # print()
             # print("P_is, ", P_is)
-            # print("s_Pic, ", s_Pic)
+            # print("s_Pic, ", sum(s_Pic))
             # print("Sigma P_is, ", sum(P_is))
             # print("Sigma s_Pic, ", sum(s_Pic))
             
@@ -924,16 +858,16 @@ class GravitMod:
                 s_Ajc.append(sum(item))
             
             # print()
-            # print("s_Ajc, ", s_Ajc)
+            # print("s_Ajc, ", sum(s_Ajc))
             # print("A_js, ", A_js)
             # print("Sigma A_js, ", sum(A_js))
             # print("Sigma s_Ajc, ", sum(s_Ajc))
             # print()
 
-            cmp_flgA = comp(A_js, s_Ajc, tlr)
+            cmp_flgA = GravitMod.comp(A_js, s_Ajc)
             # print("Flag on attracted, ", cmp_flgA)
             
-            cmp_flgP = comp(P_is, s_Pic, tlr)
+            cmp_flgP = GravitMod.comp(P_is, s_Pic)
             # print("Flag on produced, ", cmp_flgP)
 
             if(cmp_flgA == True and cmp_flgP == True):
@@ -1031,7 +965,7 @@ class GravitMod:
         return travscrm
 
 
-    def average_gf(travs, P_is, A_js, tlr=0.02):
+    def average_gf(travs, P_is, A_js, tlr=0.01):
 
         """
         Method to iteratively compute the future travels distribution using
@@ -1043,34 +977,14 @@ class GravitMod:
         Returns a matrix with adjusted travels.
         """
 
-        print()
+        # print()
         print("Enter average_gf method.")
 
         # check if the matrices have the same shape
         if(len(travs) != len(P_is) or len(travs) != len(A_js)):
             print("The matrices doesn't match. Please fix it.")
             exit()
-        
-        # function to compare the produced, respectively attracted travels
-        # within a certain tolerance
-        def comp(s_ih, s_ic, tlr):
-            """
-            Function within method to compare two values, within tolerance.
-            Takes as inputs the lists of to be compared values
-            and the precision/tolerance.
-            Returns True of False.
-            """
-            
-            # set a flag
-            flag = True
-
-            for ih, ic in zip(s_ih, s_ic):
-                if(abs(ih - ic) / ih >= tlr): 
-                    flag = False
-                    break
-
-            return flag
-         
+                 
         cmp_flg = False  # comparison flag to govern the following cycle
         p = 0   # passes counter
                
@@ -1096,7 +1010,7 @@ class GravitMod:
             # print("P_is, ", P_is)
             # print("s_Pic, ", s_Pic)
             
-            cmp_flgP = comp(P_is, s_Pic, tlr)
+            cmp_flgP = GravitMod.comp(P_is, s_Pic)
             # print("flag on produced, ", cmp_flgP)
 
             if (cmp_flgP == False):
@@ -1125,7 +1039,7 @@ class GravitMod:
             for item in travsc_tt:
                 s_Ajc.append(sum(item))
             
-            cmp_flgA = comp(A_js, s_Ajc, tlr)
+            cmp_flgA = GravitMod.comp(A_js, s_Ajc)
             # print()
             # print("flag on attracted, ", cmp_flgA)
             
@@ -1184,9 +1098,9 @@ class GravitMod:
         s_Pic = []
         for item in travscrm:
             s_Pic.append(sum(item))
-        print()
-        print("s_Pic, ", s_Pic)
-        print("P_is, ", P_is)
+        # print()
+        # print("s_Pic, ", s_Pic)
+        # print("P_is, ", P_is)
 
         # working on attracted sums
 
@@ -1198,15 +1112,15 @@ class GravitMod:
 
         for item in travsc_tt:
             s_Ajc.append(sum(item))
-        print()
-        print("s_Ajc, ", s_Ajc)
-        print("A_js, ", A_js)
+        # print()
+        # print("s_Ajc, ", s_Ajc)
+        # print("A_js, ", A_js)
 
         print("Exit average_gf method.")
         
         return travscrm
 
-    def detroit(travs, P_is, A_js, tlr=0.02):
+    def detroit(travs, P_is, A_js, tlr=0.01):
 
         """
         Method to iteratively compute the future travels distribution using
@@ -1218,7 +1132,7 @@ class GravitMod:
         Returns a matrix with adjusted travels.
         """
 
-        print()
+        # print()
         print("Enter Detroit method.")
 
         # check if the matrices have the same shape
@@ -1226,29 +1140,6 @@ class GravitMod:
             print("The matrices doesn't match. Please fix it.")
             exit()
         
-        # function to compare the produced, respectively attracted travels
-        # within a certain tolerance
-        def comp(s_ih, s_ic, tlr):
-            """
-            Function within method to compare two values, within tolerance.
-            Takes as inputs the lists of to be compared values
-            and the precision/tolerance.
-            Returns True of False.
-            """
-            
-            # set a flag
-            flag = True
-
-            for ih, ic in zip(s_ih, s_ic):
-                # print("ih, ", ih)
-                # print("ic, ", ic)
-                # print("res, ", abs(ih-ic)/ih)
-                if(abs(ih - ic) / ih >= tlr): 
-                    flag = False
-                    break
-
-            return flag
-         
         cmp_flg = False  # comparison flag to govern the following cycle
         p = 0   # passes counter
                
@@ -1274,7 +1165,7 @@ class GravitMod:
             # print("P_is, ", P_is)
             # print("s_Pic, ", s_Pic)
             
-            cmp_flgP = comp(P_is, s_Pic, tlr)
+            cmp_flgP = GravitMod.comp(P_is, s_Pic)
             # print("flag on produced, ", cmp_flgP)
 
             if (cmp_flgP == False):
@@ -1303,7 +1194,7 @@ class GravitMod:
             for item in travsc_tt:
                 s_Ajc.append(sum(item))
             
-            cmp_flgA = comp(A_js, s_Ajc, tlr)
+            cmp_flgA = GravitMod.comp(A_js, s_Ajc)
             # print()
             # print("flag on attracted, ", cmp_flgA)
             
@@ -1372,9 +1263,9 @@ class GravitMod:
         s_Pic = []
         for item in travscrm:
             s_Pic.append(sum(item))
-        print()
-        print("s_Pic, ", s_Pic)
-        print("P_is, ", P_is)
+        # print()
+        # print("s_Pic, ", s_Pic)
+        # print("P_is, ", P_is)
 
         # working on attracted sums
 
@@ -1386,9 +1277,9 @@ class GravitMod:
 
         for item in travsc_tt:
             s_Ajc.append(sum(item))
-        print()
-        print("s_Ajc, ", s_Ajc)
-        print("A_js, ", A_js)
+        # print()
+        # print("s_Ajc, ", s_Ajc)
+        # print("A_js, ", A_js)
 
         print("Exit Detroit method.")
         
@@ -1407,12 +1298,12 @@ class GravitMod:
         Returns a matrix with adjusted travels.
         """
 
-        print()
+        # print()
         print("Enter iter_wgt_dmd method")
 
-        print()
-        print("Historical travels matrix travs is, ", travs)
-        print()
+        # print()
+        # print("Historical travels matrix travs is, ", travs)
+        # print()
 
         # check if the matrices have the correct shape
         # check with the future produced
@@ -1427,26 +1318,6 @@ class GravitMod:
                   attracted! Please fix it.")
 
             exit()
-        
-        # function to compare the produced, respectively attracted travels
-        # within a certain tolerance
-        def comp(s_ih, s_ic, tlr):
-            """
-            Function within method to compare two values, within tolerance.
-            Takes as inputs the lists of to be compared values
-            and the precision/tolerance.
-            Returns True of False.
-            """
-            
-            # set a flag
-            flag = True
-
-            for ih, ic in zip(s_ih, s_ic):
-                if(abs(ih - ic) / ih >= tlr): 
-                    flag = False
-                    break
-
-            return flag
         
         # get produced travels sums on observed travels
         s_Pih = []
@@ -1500,9 +1371,9 @@ class GravitMod:
             # print("P_is, ", P_is)
             # print("s_Pic, ", s_Pic)
             
-            cmp_flg = comp(P_is, s_Pic, tlr)
+            cmp_flg = GravitMod.comp(P_is, s_Pic)
             # print(cmp_flg)
-            if (comp(s_Pic, P_is, tlr) == False):
+            if (cmp_flg == False):
                 delta_P = []    #list to store the deltas of produced travels
                 for Pis, Pic in zip(P_is, s_Pic):
                     delta_P.append(Pis - Pic)
@@ -1557,7 +1428,7 @@ class GravitMod:
             # print("A_js, ", A_js)
             # print("s_Ajc, ", s_Ajc)
 
-            if (comp(A_js, s_Ajc, tlr) == False):
+            if (GravitMod.comp(A_js, s_Ajc) == False):
                 delta_A = []    #list to store the deltas of attracted travels
                 for Ajs, Ajc in zip(A_js, s_Ajc):
                     delta_A.append(Ajs - Ajc)
@@ -1618,10 +1489,10 @@ class GravitMod:
             # print()
             # print("s_Pic, ", s_Pic)
 
-            cmp_flgA = comp(A_js, s_Ajc, tlr)
+            cmp_flgA = GravitMod.comp(A_js, s_Ajc)
             # print("Flag on attracted, ", cmp_flgA)
             
-            cmp_flgP = comp(P_is, s_Pic, tlr)
+            cmp_flgP = GravitMod.comp(P_is, s_Pic)
             # print("Flag on produced, ", cmp_flgP)
 
             if(cmp_flgA == True and cmp_flgP == True):
@@ -1641,7 +1512,7 @@ class GravitMod:
         #print("Final rounded and flatten, ", travscr)
         travscrm = [travscr[i:i + 3] for i in range(0, len(travscr), 3)]
             
-        print()
+        # print()
         print("i is, ",i)
         print("j is, ", j)
         print("Final rounded matrix, weighted, ", travscrm)
@@ -1661,78 +1532,85 @@ gvalsr = GravitMod.gravmod_init(travs, ffs, k_ij0)
 
 gvalsr_m = [gvalsr[i:i + 3] for i in range(0, len(gvalsr), 3)]
 print("****")
-print("gvalsr matrix, ", gvalsr_m)
+print("gvalsr matrix, ", gvalsr_m, '\n')
 
 gvalsadjA = GravitMod.iter_adj_in(travs, gvalsr)
-gvalsadjB = GravitMod.iter_adj_wgt(travs, gvalsr)
-print()
-print("****")
-print("gvalsadj iterative, ", gvalsadjA)
-print("gvalsadj weighted, ", gvalsadjB)
+# gvalsadjB = GravitMod.iter_adj_wgt(travs, gvalsr)
+
+# print()
+# print("****")
+# print("gvalsadj iterative, ", gvalsadjA)
+# print("gvalsadj weighted, ", gvalsadjB, '\n')
 
 ccoeffsA = GravitMod.ccoeffs(gvalsadjA, travs)
-ccoeffsB = GravitMod.ccoeffs(gvalsadjB, travs)
+# ccoeffsB = GravitMod.ccoeffs(gvalsadjB, travs)
 ccoeffs = [[0.47,0.99,1.45], [1.27,1.06,0.72], [1.47,0.98,0.23]]
-print()
-print("****")
-print("Calibration coefficients iterative, ", ccoeffsA)
-print("Calibration coefficients weighted, ", ccoeffsB)
+
+# print("****")
+# print("Calibration coefficients iterative, ", ccoeffsA)
+# print("Calibration coefficients weighted, ", ccoeffsB, '\n')
 
 gvalsr_finA = GravitMod.gravmod_fin(ffs_f, ccoeffsA, P_is, A_js)
-gvalsr_finB = GravitMod.gravmod_fin(ffs_f, ccoeffsB, P_is, A_js)
+# gvalsr_finB = GravitMod.gravmod_fin(ffs_f, ccoeffsB, P_is, A_js)
 gvalsr_finAm = [gvalsr_finA[i:i + 3] for i in range(0, len(gvalsr_finA), 3)]
-gvalsr_finBm = [gvalsr_finB[i:i + 3] for i in range(0, len(gvalsr_finB), 3)]
+# gvalsr_finBm = [gvalsr_finB[i:i + 3] for i in range(0, len(gvalsr_finB), 3)]
 gvalsr_finAf = GravitMod.furness(gvalsr_finAm, P_is, A_js)
-gvalsr_finBf = GravitMod.furness(gvalsr_finBm, P_is, A_js)
-print("****")
-print("Future demand estimation via gravitational model A, ", gvalsr_finA)
-print("Future demand estimation via gravitational model B, ", gvalsr_finB)
+# gvalsr_finBf = GravitMod.furness(gvalsr_finBm, P_is, A_js)
+
 print()
+print("****")
+# print("Future demand estimation via gravitational model A, ", gvalsr_finA)
+# print("Future demand estimation via gravitational model B, ", gvalsr_finB)
 print("Future demand estimation via gravitational model A final, ",
       gvalsr_finAf)
-print("Future demand estimation via gravitational model B final, ",
-      gvalsr_finBf)
+# print("Future demand estimation via gravitational model B final, ",
+#       gvalsr_finBf, '\n')
 
 travsc_furn = GravitMod.furness(travs, P_is, A_js)
+print()
 print("****")
-print("Travels with Furness method, ", travsc_furn)
+print("Travels with Furness method, ", travsc_furn, '\n')
 
 travs_frat = GravitMod.fratar(travs, P_is, A_js)
+print()
 print("****")
 print("Raw Fratar method result, ", travs_frat)
 print("Matrix of travels obtained with Fratar (Furness corrected), ",
-      GravitMod.furness(travs_frat, P_is, A_js))
+      GravitMod.furness(travs_frat, P_is, A_js), '\n')
 
 travsc_avgf = GravitMod.average_gf(travs, P_is, A_js)
 print("****")
-print("Matrix of travels obtained with average growth factor, ", travsc_avgf)
+print("Matrix of travels obtained with average growth factor, ", travsc_avgf,
+      '\n')
 
 travsc_detr = GravitMod.detroit(travs, P_is, A_js)
 print("****")
-print("Matrix of travels obtained with_Detroit method, ", travsc_detr)
+print("Matrix of travels obtained with_Detroit method, ", travsc_detr, '\n')
 
 travsc_wgtd_prod = GravitMod.iter_wgt_dmd(travs, P_is, A_js)
+
 print("****")
 print("Matrix of travels (produced) obtained with weighted coefficients is, ",
-      travsc_wgtd_prod)
+      travsc_wgtd_prod, '\n')
 
 # check weighted estimation starting with attracted (not produced, like
 # previous call
 
 # transpose the travels matrix
 travs_tt = list(zip(*travs))
-print("Transpose travel matrix, ", travs_tt, '\n')
+print("Transpose travel matrix, ", travs_tt)
 print("Travel matrix, ", travs, '\n')
 
 travsc_wgtd_at = GravitMod.iter_wgt_dmd(travs_tt,A_js, P_is)
-print("****")
-print("Matrix of travels (attracted) obtained with weighted coefficients is, ",
-      list(zip(*travsc_wgtd_at)))
+
+# print("Matrix of travels (attracted) obtained with weighted coefficients is, ",
+#      list(zip(*travsc_wgtd_at)))
 
 travsc_wgtd_atL = []   #matrix as list of lists
 for row in list(zip(*travsc_wgtd_at)):
     travsc_wgtd_atL.append(list(row))
-print("Matrix of travels lists (attracted)", travsc_wgtd_atL)
+print("Matrix of travels (attracted) obtained with weighted coefficients is, " , travsc_wgtd_atL, '\n')
+
 print("****")
 travsc_wgtd_aver = []
 for r1, r2 in zip(travsc_wgtd_prod, travsc_wgtd_atL):
@@ -1742,4 +1620,3 @@ travsc_wgtd_aver_m = [travsc_wgtd_aver[i:i + 3] for i in range(0,
                                                                len(travsc_wgtd_aver), 3)]
 print("Matrix of travels (averaged) obtained with weighted coefficients is, ",
       travsc_wgtd_aver_m)
-
